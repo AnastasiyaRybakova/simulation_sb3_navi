@@ -1,0 +1,7 @@
+string opname
+string songDirPath
+string songFilename
+string mocapDirPath
+string mocapFilename
+--- 
+string result

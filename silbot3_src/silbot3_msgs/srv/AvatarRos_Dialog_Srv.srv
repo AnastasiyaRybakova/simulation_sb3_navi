@@ -1,0 +1,12 @@
+bool open_state
+
+# icon constants
+uint8 ICON_TYPE_POSITION = 0
+uint8 ICON_TYPE_DIRECTION = 1
+uint8 ICON_TYPE_INFORMATION = 2
+uint8 ICON_TYPE_WARNING = 3
+uint8 icon_type
+
+string ment
+---
+string result

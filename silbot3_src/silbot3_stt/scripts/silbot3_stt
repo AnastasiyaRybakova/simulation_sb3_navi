@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
+import rospy
+from std_msgs.msg import String, Empty, UInt8
+from silbot3_msgs.srv import SpeechRecognitionStart, SpeechRecognitionStartResponse
+
+import os
+import signal
+import traceback
+import speech_recognition as sr
+from speech_recognition import Microphone
+
+class RecognizerNode:
+    def __init__(self):
+        self.recognizer = sr.Recognizer()
+        self.recognizer.operation_timeout = rospy.get_param('~operation_timeout', 10)
+        self.recognizer.dynamic_energy_threshold = rospy.get_param('~dynamic_threshold', False)
+        self.recognizer.pause_threshold = rospy.get_param('~pause_threshold', 0.5)
+        self.recognizer.energy_threshold = rospy.get_param('~energy_threshold', 500)
+        self.mic_name = rospy.get_param('~mic_name', 'default')
+        self.ambient_noise = rospy.get_param('~ambient_noise', True)
+        rospy.loginfo('mic_name: %s, ambient_noise: %s', self.mic_name, str(self.ambient_noise))
+        self.is_working = False
+        rospy.Service('/silbot3_stt/start', SpeechRecognitionStart, self.start)
+    def start(self, req):
+        timeout = req.timeout
+        response = SpeechRecognitionStartResponse()
+        response.recognized_text = ''
+        if self.is_working:
+            response.recognition_result = SpeechRecognitionStartResponse.RECOGNITION_RESULT_BUSY
+            return response
+        self.is_working = True
+        mic_idx = 0
+        for i, microphone_name in enumerate(Microphone.list_microphone_names()):
+            if self.mic_name in microphone_name:
+                mic_idx = i
+                rospy.loginfo('Found mic: %d=%s', mic_idx, microphone_name)
+                break
+        try:
+            with sr.Microphone(device_index=mic_idx) as source:
+                if self.ambient_noise:
+                    self.recognizer.adjust_for_ambient_noise(source)
+                rospy.loginfo('Recognition start')
+                audio = self.recognizer.listen(source, timeout=timeout)
+            result = self.recognizer.recognize_google(audio, language='ko-KR')
+            result = result.encode('utf-8')
+            rospy.loginfo('Recognition result: %s', result)
+            response.recognized_text = result
+        except (sr.UnknownValueError, sr.RequestError) as e:
+            response.recognition_result = SpeechRecognitionStartResponse.RECOGNITION_RESULT_FAILED
+        except sr.WaitTimeoutError:
+            response.recognition_result = SpeechRecognitionStartResponse.RECOGNITION_RESULT_TIMEOUT
+        finally:
+            self.is_working = False
+        return response
+
+def exit(signum, frame):
+    pass
+
+def init():
+    rospy.init_node('silbot3_stt', anonymous=True)
+    r = RecognizerNode()
+    rospy.spin()
+
+if __name__ == '__main__':
+    signal.signal(signal.SIGINT, exit)
+    try:
+        init()
+    except rospy.ROSInterruptException:
+        pass
+

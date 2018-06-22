@@ -1,0 +1,5 @@
+string opname
+uint32 duartion
+float32 weight
+---
+string result

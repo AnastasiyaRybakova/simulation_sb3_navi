@@ -1,0 +1,7 @@
+string opname
+int32 posX
+int32 posY
+int32 width
+int32 height
+---
+string result

@@ -1,0 +1,7 @@
+string command
+string pkgname
+string executable
+string[] args
+---
+int32 retcode
+string retdesc

@@ -1,0 +1,8 @@
+<launch>
+  <node
+    name="rviz"
+    pkg="rviz"
+    type="rviz"
+    args="-d $(find silbot3_navigation)/rviz/silbot3_navigation.rviz" />
+</launch>
+

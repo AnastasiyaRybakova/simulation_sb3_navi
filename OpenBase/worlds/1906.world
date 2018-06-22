@@ -1,0 +1,3882 @@
+<sdf version='1.6'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.5 -1</direction>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics name='default_physics' default='0' type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='open_base'>
+      <link name='base_footprint'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>1e-06 0.02402 0.313247 0 -0 0</pose>
+          <mass>62.7691</mass>
+          <inertia>
+            <ixx>4.50843</ixx>
+            <ixy>-1.06127e-05</ixy>
+            <ixz>-0.000498782</ixz>
+            <iyy>1.12013</iyy>
+            <iyz>0.214466</iyz>
+            <izz>4.45203</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_footprint_fixed_joint_lump__base_link_collision'>
+          <pose frame=''>0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/base_link.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_footprint_fixed_joint_lump__open_base/hokuyo_link_collision_1'>
+          <pose frame=''>0 -0.17 0.24 0 0 -1.57</pose>
+          <geometry>
+            <box>
+              <size>0.1 0.1 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base_footprint_fixed_joint_lump__kinect_link_collision_2'>
+          <pose frame=''>0 -0.1 0.61 0 0 -1.57</pose>
+          <geometry>
+            <box>
+              <size>0.03 0.03 0.03</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='base_footprint_fixed_joint_lump__base_link_visual'>
+          <pose frame=''>0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/base_link.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__open_base/hokuyo_link_visual_1'>
+          <pose frame=''>0 -0.17 0.24 0 0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/sensor/hokuyo.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__kinect_link_visual_2'>
+          <pose frame=''>0 -0.1 0.61 0 0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/sensor/xtion_pro_camera.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__sonar_1_link_visual_3'>
+          <pose frame=''>6e-06 -0.208 0.16 0 0 -1.57</pose>
+          <geometry>
+            <box>
+              <size>0.016 0.044 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__sonar_2_link_visual_4'>
+          <pose frame=''>-0.147078 -0.147078 0.16 0 0 -2.35619</pose>
+          <geometry>
+            <box>
+              <size>0.016 0.044 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__sonar_3_link_visual_5'>
+          <pose frame=''>-0.208 -0 0.16 0 0 -3.14159</pose>
+          <geometry>
+            <box>
+              <size>0.016 0.044 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__sonar_4_link_visual_6'>
+          <pose frame=''>-0.147078 0.147078 0.16 0 -0 2.3562</pose>
+          <geometry>
+            <box>
+              <size>0.016 0.044 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__sonar_5_link_visual_7'>
+          <pose frame=''>0 0.208 0.16 0 -0 1.5708</pose>
+          <geometry>
+            <box>
+              <size>0.016 0.044 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__sonar_6_link_visual_8'>
+          <pose frame=''>0.147078 0.147078 0.16 0 -0 0.785395</pose>
+          <geometry>
+            <box>
+              <size>0.016 0.044 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__sonar_7_link_visual_9'>
+          <pose frame=''>0.208 -0 0.16 0 -0 -5e-06</pose>
+          <geometry>
+            <box>
+              <size>0.016 0.044 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__sonar_8_link_visual_10'>
+          <pose frame=''>0.147078 -0.147078 0.16 0 -0 -0.785395</pose>
+          <geometry>
+            <box>
+              <size>0.016 0.044 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <velocity_decay/>
+        <sensor name='head_hokuyo_sensor' type='ray'>
+          <visualize>0</visualize>
+          <update_rate>40</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>720</samples>
+                <resolution>1</resolution>
+                <min_angle>-1.5708</min_angle>
+                <max_angle>1.5708</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.1</min>
+              <max>30</max>
+              <resolution>0.01</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.01</stddev>
+            </noise>
+          </ray>
+          <plugin name='gazebo_ros_head_hokuyo_controller' filename='libgazebo_ros_laser.so'>
+            <topicName>/scan</topicName>
+            <frameName>hokuyo_link</frameName>
+            <robotNamespace>open_base</robotNamespace>
+          </plugin>
+          <pose frame=''>0 -0.17 0.24 0 0 -1.57</pose>
+        </sensor>
+        <velocity_decay/>
+        <sensor name='openni_camera_camera' type='depth'>
+          <always_on>1</always_on>
+          <visualize>1</visualize>
+          <camera name='__default__'>
+            <horizontal_fov>1.047</horizontal_fov>
+            <image>
+              <width>640</width>
+              <height>480</height>
+              <format>R8G8B8</format>
+            </image>
+            <depth_camera>
+              <output>depths</output>
+            </depth_camera>
+            <clip>
+              <near>0.1</near>
+              <far>100</far>
+            </clip>
+          </camera>
+          <plugin name='kinect_controller' filename='libgazebo_ros_openni_kinect.so'>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>10.0</updateRate>
+            <cameraName>camera</cameraName>
+            <frameName>kinect_link</frameName>
+            <imageTopicName>/camera/rgb/image_raw</imageTopicName>
+            <depthImageTopicName>/camera/depth/image_raw</depthImageTopicName>
+            <pointCloudTopicName>/camera/depth/points</pointCloudTopicName>
+            <cameraInfoTopicName>/camera/rgb/camera_info</cameraInfoTopicName>
+            <depthImageCameraInfoTopicName>/camera/depth/camera_info</depthImageCameraInfoTopicName>
+            <pointCloudCutoff>0.4</pointCloudCutoff>
+            <hackBaseline>0.07</hackBaseline>
+            <distortionK1>0.0</distortionK1>
+            <distortionK2>0.0</distortionK2>
+            <distortionK3>0.0</distortionK3>
+            <distortionT1>0.0</distortionT1>
+            <distortionT2>0.0</distortionT2>
+            <CxPrime>0.0</CxPrime>
+            <Cx>0.0</Cx>
+            <Cy>0.0</Cy>
+            <focalLength>0.0</focalLength>
+            <robotNamespace>/open_base/</robotNamespace>
+          </plugin>
+          <pose frame=''>0 -0.1 0.61 0 0 -1.57</pose>
+        </sensor>
+        <velocity_decay/>
+        <sensor name='sonar' type='ray'>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.3</min>
+              <max>1.4</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='gazebo_ros_range' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>10.0</updateRate>
+            <topicName>range_1</topicName>
+            <frameName>sonar_1_link</frameName>
+            <fov>0.4</fov>
+            <radiation>sonar</radiation>
+            <robotNamespace>/open_base/</robotNamespace>
+          </plugin>
+          <pose frame=''>0 -0.2 0.16 0 0 -1.57</pose>
+        </sensor>
+        <velocity_decay/>
+        <sensor name='sonar' type='ray'>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.3</min>
+              <max>1.4</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='gazebo_ros_range' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>10.0</updateRate>
+            <topicName>range_2</topicName>
+            <frameName>sonar_2_link</frameName>
+            <fov>0.4</fov>
+            <radiation>sonar</radiation>
+            <robotNamespace>/open_base/</robotNamespace>
+          </plugin>
+          <pose frame=''>-0.141421 -0.141421 0.16 0 0 -2.35619</pose>
+        </sensor>
+        <velocity_decay/>
+        <sensor name='sonar' type='ray'>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.3</min>
+              <max>1.4</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='gazebo_ros_range' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>10.0</updateRate>
+            <topicName>range_3</topicName>
+            <frameName>sonar_3_link</frameName>
+            <fov>0.4</fov>
+            <radiation>sonar</radiation>
+            <robotNamespace>/open_base/</robotNamespace>
+          </plugin>
+          <pose frame=''>-0.2 0 0.16 0 0 -3.14159</pose>
+        </sensor>
+        <velocity_decay/>
+        <sensor name='sonar' type='ray'>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.3</min>
+              <max>1.4</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='gazebo_ros_range' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>10.0</updateRate>
+            <topicName>range_4</topicName>
+            <frameName>sonar_4_link</frameName>
+            <fov>0.4</fov>
+            <radiation>sonar</radiation>
+            <robotNamespace>/open_base/</robotNamespace>
+          </plugin>
+          <pose frame=''>-0.141421 0.141421 0.16 0 -0 2.3562</pose>
+        </sensor>
+        <velocity_decay/>
+        <sensor name='sonar' type='ray'>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.3</min>
+              <max>1.4</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='gazebo_ros_range' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>10.0</updateRate>
+            <topicName>range_5</topicName>
+            <frameName>sonar_5_link</frameName>
+            <fov>0.4</fov>
+            <radiation>sonar</radiation>
+            <robotNamespace>/open_base/</robotNamespace>
+          </plugin>
+          <pose frame=''>0 0.2 0.16 0 -0 1.5708</pose>
+        </sensor>
+        <velocity_decay/>
+        <sensor name='sonar' type='ray'>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.3</min>
+              <max>1.4</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='gazebo_ros_range' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>10.0</updateRate>
+            <topicName>range_6</topicName>
+            <frameName>sonar_6_link</frameName>
+            <fov>0.4</fov>
+            <radiation>sonar</radiation>
+            <robotNamespace>/open_base/</robotNamespace>
+          </plugin>
+          <pose frame=''>0.141421 0.141421 0.16 0 -0 0.785395</pose>
+        </sensor>
+        <velocity_decay/>
+        <sensor name='sonar' type='ray'>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.3</min>
+              <max>1.4</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='gazebo_ros_range' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>10.0</updateRate>
+            <topicName>range_7</topicName>
+            <frameName>sonar_7_link</frameName>
+            <fov>0.4</fov>
+            <radiation>sonar</radiation>
+            <robotNamespace>/open_base/</robotNamespace>
+          </plugin>
+          <pose frame=''>0.2 0 0.16 0 -0 -5e-06</pose>
+        </sensor>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <sensor name='sonar' type='ray'>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.1</min_angle>
+                <max_angle>0.1</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.3</min>
+              <max>1.4</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='gazebo_ros_range' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>10.0</updateRate>
+            <topicName>range_8</topicName>
+            <frameName>sonar_8_link</frameName>
+            <fov>0.4</fov>
+            <radiation>sonar</radiation>
+            <robotNamespace>/open_base/</robotNamespace>
+          </plugin>
+          <pose frame=''>0.141421 -0.141421 0.16 0 -0 -0.785395</pose>
+        </sensor>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='head_pan'>
+        <pose frame=''>0 0.027 0.892 1.5708 -0 0</pose>
+        <inertial>
+          <pose frame=''>-0 0.043444 0 0 -0 0</pose>
+          <mass>0.0271785</mass>
+          <inertia>
+            <ixx>1.80958e-05</ixx>
+            <ixy>1.89946e-21</ixy>
+            <ixz>-2.48737e-11</ixz>
+            <iyy>1.43652e-06</iyy>
+            <iyz>-1.5576e-12</iyz>
+            <izz>1.80877e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='head_pan_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/head_pan.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='head_pan_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/head_pan.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='head_pan' type='revolute'>
+        <child>head_pan</child>
+        <parent>base_footprint</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.13</lower>
+            <upper>1.13</upper>
+            <effort>30</effort>
+            <velocity>1.57</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='head_tilt'>
+        <pose frame=''>0 0.027 0.972 1.5708 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0.00018 0.098466 0 -0 0</pose>
+          <mass>3.1958</mass>
+          <inertia>
+            <ixx>0.016128</ixx>
+            <ixy>-3.74549e-07</ixy>
+            <ixz>4.1057e-08</ixz>
+            <iyy>0.0120784</iyy>
+            <iyz>6.02015e-05</iyz>
+            <izz>0.0190875</izz>
+          </inertia>
+        </inertial>
+        <collision name='head_tilt_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/head_tilt.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='head_tilt_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/head_tilt.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='head_tilt' type='revolute'>
+        <child>head_tilt</child>
+        <parent>head_pan</parent>
+        <axis>
+          <xyz>-1 0 0</xyz>
+          <limit>
+            <lower>-0.17</lower>
+            <upper>0.61</upper>
+            <effort>30</effort>
+            <velocity>1.57</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.01</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='left_shoulder_roll'>
+        <pose frame=''>0.13 0.04 0.69 1.5708 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.040224 0 -0 0 -0 0</pose>
+          <mass>0.52377</mass>
+          <inertia>
+            <ixx>0.000508939</ixx>
+            <ixy>1.2276e-11</ixy>
+            <ixz>-3.81706e-10</ixz>
+            <iyy>0.00069487</iyy>
+            <iyz>8.2592e-11</iyz>
+            <izz>0.000695111</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_shoulder_roll_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/left_shoulder_roll.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_shoulder_roll_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/left_shoulder_roll.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='left_shoulder_roll' type='revolute'>
+        <child>left_shoulder_roll</child>
+        <parent>base_footprint</parent>
+        <axis>
+          <xyz>-1 0 0</xyz>
+          <limit>
+            <lower>-1.57</lower>
+            <upper>2.97</upper>
+            <effort>30</effort>
+            <velocity>1.57</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='left_shoulder_pitch'>
+        <pose frame=''>0.21 0.04 0.69 1.5708 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.004472 -0.060881 0 0 -0 0</pose>
+          <mass>0.464234</mass>
+          <inertia>
+            <ixx>0.00110738</ixx>
+            <ixy>-3.01463e-06</ixy>
+            <ixz>6.73343e-13</ixz>
+            <iyy>0.000491854</iyy>
+            <iyz>1.01557e-11</iyz>
+            <izz>0.000794792</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_shoulder_pitch_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/left_shoulder_pitch.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_shoulder_pitch_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/left_shoulder_pitch.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='left_shoulder_pitch' type='revolute'>
+        <child>left_shoulder_pitch</child>
+        <parent>left_shoulder_roll</parent>
+        <axis>
+          <xyz>0 -1 0</xyz>
+          <limit>
+            <lower>-0.35</lower>
+            <upper>2.09</upper>
+            <effort>30</effort>
+            <velocity>1.57</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='left_elbow_pitch'>
+        <pose frame=''>0.21 0.04 0.57 1.5708 -0 0</pose>
+        <inertial>
+          <pose frame=''>-0.002738 -0.099275 -0 0 -0 0</pose>
+          <mass>0.793075</mass>
+          <inertia>
+            <ixx>0.00370912</ixx>
+            <ixy>-0.000111595</ixy>
+            <ixz>-1.37331e-09</ixz>
+            <iyy>0.000538057</iyy>
+            <iyz>6.96383e-11</iyz>
+            <izz>0.00343366</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_elbow_pitch_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/left_elbow_pitch.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_elbow_pitch_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/left_elbow_pitch.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='left_elbow_pitch' type='revolute'>
+        <child>left_elbow_pitch</child>
+        <parent>left_shoulder_pitch</parent>
+        <axis>
+          <xyz>0 -1 0</xyz>
+          <limit>
+            <lower>-1.57</lower>
+            <upper>0.35</upper>
+            <effort>30</effort>
+            <velocity>1.57</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='right_shoulder_roll'>
+        <pose frame=''>-0.13 0.04 0.69 1.5708 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0.040224 0 -0 0 -0 0</pose>
+          <mass>0.52377</mass>
+          <inertia>
+            <ixx>0.000508939</ixx>
+            <ixy>1.2276e-11</ixy>
+            <ixz>-3.81706e-10</ixz>
+            <iyy>0.00069487</iyy>
+            <iyz>8.2592e-11</iyz>
+            <izz>0.000695111</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_shoulder_roll_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/right_shoulder_roll.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_shoulder_roll_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/right_shoulder_roll.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='right_shoulder_roll' type='revolute'>
+        <child>right_shoulder_roll</child>
+        <parent>base_footprint</parent>
+        <axis>
+          <xyz>-1 0 0</xyz>
+          <limit>
+            <lower>-1.57</lower>
+            <upper>2.97</upper>
+            <effort>30</effort>
+            <velocity>1.57</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='right_shoulder_pitch'>
+        <pose frame=''>-0.21 0.04 0.69 1.5708 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0.004472 -0.060881 0 0 -0 0</pose>
+          <mass>0.464234</mass>
+          <inertia>
+            <ixx>0.00110738</ixx>
+            <ixy>-3.01463e-06</ixy>
+            <ixz>6.73342e-13</ixz>
+            <iyy>0.000491854</iyy>
+            <iyz>1.01557e-11</iyz>
+            <izz>0.000794792</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_shoulder_pitch_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/right_shoulder_pitch.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_shoulder_pitch_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/right_shoulder_pitch.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='right_shoulder_pitch' type='revolute'>
+        <child>right_shoulder_pitch</child>
+        <parent>right_shoulder_roll</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-0.35</lower>
+            <upper>2.09</upper>
+            <effort>30</effort>
+            <velocity>1.57</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='right_elbow_pitch'>
+        <pose frame=''>-0.21 0.04 0.57 1.5708 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>-0.002738 -0.099275 -0 0 -0 0</pose>
+          <mass>0.793075</mass>
+          <inertia>
+            <ixx>0.00370912</ixx>
+            <ixy>-0.000111595</ixy>
+            <ixz>-1.37331e-09</ixz>
+            <iyy>0.000538057</iyy>
+            <iyz>6.96383e-11</iyz>
+            <izz>0.00343366</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_elbow_pitch_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/right_elbow_pitch.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_elbow_pitch_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/right_elbow_pitch.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='right_elbow_pitch' type='revolute'>
+        <child>right_elbow_pitch</child>
+        <parent>right_shoulder_pitch</parent>
+        <axis>
+          <xyz>0 11 0</xyz>
+          <limit>
+            <lower>-1.57</lower>
+            <upper>0.35</upper>
+            <effort>30</effort>
+            <velocity>1.57</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='rim_back_link'>
+        <pose frame=''>0 0.3 0.01 1.5708 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 -0.000343 0 -0 0</pose>
+          <mass>0.835758</mass>
+          <inertia>
+            <ixx>6.63684e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>6.63684e-05</iyy>
+            <iyz>0</iyz>
+            <izz>9.40333e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='rim_back_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/rim.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='rim_back_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/rim.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='rim_back_joint' type='revolute'>
+        <child>rim_back_link</child>
+        <parent>base_footprint</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_e_rim_back_link'>
+        <pose frame=''>-0.01355 0.3055 0.01 0 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_e_rim_back_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_e_rim_back_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_e_rim_back_joint' type='revolute'>
+        <child>roller_e_rim_back_link</child>
+        <parent>rim_back_link</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_n_rim_back_link'>
+        <pose frame=''>0 0.3055 0.02355 2.31414 -1.57079 0.827453</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_n_rim_back_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_n_rim_back_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_n_rim_back_joint' type='revolute'>
+        <child>roller_n_rim_back_link</child>
+        <parent>rim_back_link</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_ne_rim_back_link'>
+        <pose frame=''>-0.009581 0.2945 0.019581 0 -0.785398 -3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_ne_rim_back_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_ne_rim_back_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_ne_rim_back_joint' type='revolute'>
+        <child>roller_ne_rim_back_link</child>
+        <parent>rim_back_link</parent>
+        <axis>
+          <xyz>0.707107 0 0.707107</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_nw_rim_back_link'>
+        <pose frame=''>0.009581 0.2945 0.019581 -3.14159 -0.785398 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_nw_rim_back_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_nw_rim_back_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_nw_rim_back_joint' type='revolute'>
+        <child>roller_nw_rim_back_link</child>
+        <parent>rim_back_link</parent>
+        <axis>
+          <xyz>0.707107 0 -0.707107</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_s_rim_back_link'>
+        <pose frame=''>0 0.3055 -0.00355 2.31414 1.57079 -0.827453</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_s_rim_back_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_s_rim_back_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_s_rim_back_joint' type='revolute'>
+        <child>roller_s_rim_back_link</child>
+        <parent>rim_back_link</parent>
+        <axis>
+          <xyz>-1 0 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_se_rim_back_link'>
+        <pose frame=''>-0.009581 0.2945 0.000419 0 0.785398 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_se_rim_back_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_se_rim_back_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_se_rim_back_joint' type='revolute'>
+        <child>roller_se_rim_back_link</child>
+        <parent>rim_back_link</parent>
+        <axis>
+          <xyz>-0.707107 0 0.707107</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_sw_rim_back_link'>
+        <pose frame=''>0.009581 0.2945 0.000419 -3.14159 0.785398 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_sw_rim_back_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_sw_rim_back_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_sw_rim_back_joint' type='revolute'>
+        <child>roller_sw_rim_back_link</child>
+        <parent>rim_back_link</parent>
+        <axis>
+          <xyz>-0.707107 0 -0.707107</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_w_rim_back_link'>
+        <pose frame=''>0.01355 0.3055 0.01 -3.14159 -0 -0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_w_rim_back_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_w_rim_back_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_w_rim_back_joint' type='revolute'>
+        <child>roller_w_rim_back_link</child>
+        <parent>rim_back_link</parent>
+        <axis>
+          <xyz>0 0 -1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='rim_left_link'>
+        <pose frame=''>0.259808 -0.15 0.01 1.5708 -0 1.0472</pose>
+        <inertial>
+          <pose frame=''>0 0 -0.000343 0 -0 0</pose>
+          <mass>0.835758</mass>
+          <inertia>
+            <ixx>6.63684e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>6.63684e-05</iyy>
+            <iyz>0</iyz>
+            <izz>9.40333e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='rim_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/rim.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='rim_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/rim.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='rim_left_joint' type='revolute'>
+        <child>rim_left_link</child>
+        <parent>base_footprint</parent>
+        <axis>
+          <xyz>0.866025 -0.5 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_e_rim_left_link'>
+        <pose frame=''>0.271346 -0.141015 0.01 0 -0 1.0472</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_e_rim_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_e_rim_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_e_rim_left_joint' type='revolute'>
+        <child>roller_e_rim_left_link</child>
+        <parent>rim_left_link</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_n_rim_left_link'>
+        <pose frame=''>0.264571 -0.15275 0.02355 2.2143 -1.57079 -1.14596</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_n_rim_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_n_rim_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_n_rim_left_joint' type='revolute'>
+        <child>roller_n_rim_left_link</child>
+        <parent>rim_left_link</parent>
+        <axis>
+          <xyz>-0.5 -0.866025 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_ne_rim_left_link'>
+        <pose frame=''>0.259835 -0.138952 0.019581 0 -0.785398 1.0472</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_ne_rim_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_ne_rim_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_ne_rim_left_joint' type='revolute'>
+        <child>roller_ne_rim_left_link</child>
+        <parent>rim_left_link</parent>
+        <axis>
+          <xyz>-0.353553 -0.612372 0.707107</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_nw_rim_left_link'>
+        <pose frame=''>0.250254 -0.155548 0.019581 -3.14159 -0.785398 -2.0944</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_nw_rim_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_nw_rim_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_nw_rim_left_joint' type='revolute'>
+        <child>roller_nw_rim_left_link</child>
+        <parent>rim_left_link</parent>
+        <axis>
+          <xyz>-0.353553 -0.612372 -0.707107</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_s_rim_left_link'>
+        <pose frame=''>0.264571 -0.15275 -0.00355 2.15155 1.57079 -3.08759</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_s_rim_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_s_rim_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_s_rim_left_joint' type='revolute'>
+        <child>roller_s_rim_left_link</child>
+        <parent>rim_left_link</parent>
+        <axis>
+          <xyz>0.5 0.866025 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_se_rim_left_link'>
+        <pose frame=''>0.259835 -0.138952 0.000419 0 0.785398 1.0472</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_se_rim_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_se_rim_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_se_rim_left_joint' type='revolute'>
+        <child>roller_se_rim_left_link</child>
+        <parent>rim_left_link</parent>
+        <axis>
+          <xyz>0.353553 0.612372 0.707107</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_sw_rim_left_link'>
+        <pose frame=''>0.250254 -0.155548 0.000419 -3.14159 0.785398 -2.0944</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_sw_rim_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_sw_rim_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_sw_rim_left_joint' type='revolute'>
+        <child>roller_sw_rim_left_link</child>
+        <parent>rim_left_link</parent>
+        <axis>
+          <xyz>0.353553 0.612372 -0.707107</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_w_rim_left_link'>
+        <pose frame=''>0.257796 -0.164485 0.01 -3.14159 -0 -2.0944</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_w_rim_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_w_rim_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_w_rim_left_joint' type='revolute'>
+        <child>roller_w_rim_left_link</child>
+        <parent>rim_left_link</parent>
+        <axis>
+          <xyz>0 0 -1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='rim_right_link'>
+        <pose frame=''>-0.259807 -0.15 0.01 1.5708 -0 -1.0472</pose>
+        <inertial>
+          <pose frame=''>0 0 -0.000343 0 -0 0</pose>
+          <mass>0.835758</mass>
+          <inertia>
+            <ixx>6.63684e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>6.63684e-05</iyy>
+            <iyz>0</iyz>
+            <izz>9.40333e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='rim_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/rim.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='rim_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/rim.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='rim_right_joint' type='revolute'>
+        <child>rim_right_link</child>
+        <parent>base_footprint</parent>
+        <axis>
+          <xyz>-0.866025 -0.5 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_e_rim_right_link'>
+        <pose frame=''>-0.257795 -0.164485 0.01 -0 -0 -1.0472</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_e_rim_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_e_rim_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_e_rim_right_joint' type='revolute'>
+        <child>roller_e_rim_right_link</child>
+        <parent>rim_right_link</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_n_rim_right_link'>
+        <pose frame=''>-0.26457 -0.15275 0.02355 2.15155 -1.57079 3.08759</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_n_rim_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_n_rim_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_n_rim_right_joint' type='revolute'>
+        <child>roller_n_rim_right_link</child>
+        <parent>rim_right_link</parent>
+        <axis>
+          <xyz>-0.5 0.866025 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_ne_rim_right_link'>
+        <pose frame=''>-0.250253 -0.155548 0.019581 0 -0.785398 -1.0472</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_ne_rim_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_ne_rim_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_ne_rim_right_joint' type='revolute'>
+        <child>roller_ne_rim_right_link</child>
+        <parent>rim_right_link</parent>
+        <axis>
+          <xyz>-0.353553 0.612372 0.707107</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_nw_rim_right_link'>
+        <pose frame=''>-0.259835 -0.138952 0.019581 -3.14159 -0.785398 2.0944</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_nw_rim_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_nw_rim_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_nw_rim_right_joint' type='revolute'>
+        <child>roller_nw_rim_right_link</child>
+        <parent>rim_right_link</parent>
+        <axis>
+          <xyz>-0.353553 0.612372 -0.707107</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_s_rim_right_link'>
+        <pose frame=''>-0.26457 -0.15275 -0.00355 2.2143 1.57079 1.14596</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_s_rim_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_s_rim_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_s_rim_right_joint' type='revolute'>
+        <child>roller_s_rim_right_link</child>
+        <parent>rim_right_link</parent>
+        <axis>
+          <xyz>0.5 -0.866025 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_se_rim_right_link'>
+        <pose frame=''>-0.250253 -0.155548 0.000419 0 0.785398 -1.0472</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_se_rim_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_se_rim_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_se_rim_right_joint' type='revolute'>
+        <child>roller_se_rim_right_link</child>
+        <parent>rim_right_link</parent>
+        <axis>
+          <xyz>0.353553 -0.612372 0.707107</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_sw_rim_right_link'>
+        <pose frame=''>-0.259835 -0.138952 0.000419 -3.14159 0.785398 2.0944</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_sw_rim_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_sw_rim_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_sw_rim_right_joint' type='revolute'>
+        <child>roller_sw_rim_right_link</child>
+        <parent>rim_right_link</parent>
+        <axis>
+          <xyz>0.353553 -0.612372 -0.707107</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='roller_w_rim_right_link'>
+        <pose frame=''>-0.271345 -0.141015 0.01 -3.14159 -0 2.0944</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.113845</mass>
+          <inertia>
+            <ixx>2.53776e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.53776e-06</iyy>
+            <iyz>0</iyz>
+            <izz>1.47666e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='roller_w_rim_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='roller_w_rim_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/kist/catkin_ws/src/simulation_silbot3_navigation/OpenBase/ROS/open_base/mesh/roller.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='roller_w_rim_right_joint' type='revolute'>
+        <child>roller_w_rim_right_link</child>
+        <parent>rim_right_link</parent>
+        <axis>
+          <xyz>0 0 -1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+        <robotNamespace>/open_base</robotNamespace>
+      </plugin>
+      <static>0</static>
+      <plugin name='silbot_base_controller' filename='libgazebo_ros_planar_move.so'>
+        <commandTopic>cmd_vel</commandTopic>
+        <odometryTopic>odom</odometryTopic>
+        <odometryFrame>odom</odometryFrame>
+        <odometryRate>20.0</odometryRate>
+        <robotBaseFrame>base_footprint</robotBaseFrame>
+        <robotNamespace>/open_base/</robotNamespace>
+      </plugin>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+    </model>
+    <model name='traffic_parking'>
+      <pose frame=''>-0.003051 -2.07647 0.125 0 -0 0</pose>
+      <link name='box'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://traffic_parking/materials/scripts</uri>
+              <uri>model://traffic_parking/materials/textures</uri>
+              <name>traffic_parking</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <inertial>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='traffic_tunnel'>
+      <pose frame=''>0.723437 -1.921 0.125 0 -0 0</pose>
+      <link name='box'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://traffic_tunnel/materials/scripts</uri>
+              <uri>model://traffic_tunnel/materials/textures</uri>
+              <name>traffic_tunnel</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <inertial>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='traffic_bar_up'>
+      <pose frame=''>-0.979241 -1.73114 0 0 -0 0</pose>
+      <link name='traffic_bar_up'>
+        <collision name='collision'>
+          <pose frame=''>-1.95 0.6 0.3 0 1.57 0</pose>
+          <geometry>
+            <box>
+              <size>0.3 0.01 0.023</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose frame=''>-1.95 0.6 0.3 0 1.57 0</pose>
+          <geometry>
+            <box>
+              <size>0.3 0.01 0.023</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://traffic_bar_up/materials/scripts</uri>
+              <uri>model://traffic_bar_up/materials/textures</uri>
+              <name>traffic_bar</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <static>1</static>
+    </model>
+    <model name='traffic_light_red'>
+      <pose frame=''>-1.6683 -2.01154 0 0 0 -1.5708</pose>
+      <link name='traffic_light_red'>
+        <collision name='collision'>
+          <pose frame=''>1.3 -1.95 0.13 0 -0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.015</radius>
+            </sphere>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose frame=''>1.3 -1.95 0.13 0 -0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.015</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Red</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <static>1</static>
+    </model>
+    <model name='traffic_tunnel_0'>
+      <pose frame=''>1.7458 0.286571 0.125 0 -0 0</pose>
+      <link name='box'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://traffic_tunnel/materials/scripts</uri>
+              <uri>model://traffic_tunnel/materials/textures</uri>
+              <name>traffic_tunnel</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <inertial>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='traffic_tunnel_1'>
+      <pose frame=''>1.81733 -0.843182 0.125 0 -0 0</pose>
+      <link name='box'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://traffic_tunnel/materials/scripts</uri>
+              <uri>model://traffic_tunnel/materials/textures</uri>
+              <name>traffic_tunnel</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <inertial>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='traffic_tunnel_2'>
+      <pose frame=''>-3.2142 0.869311 0.125 0 -0 0</pose>
+      <link name='box'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://traffic_tunnel/materials/scripts</uri>
+              <uri>model://traffic_tunnel/materials/textures</uri>
+              <name>traffic_tunnel</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <inertial>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='traffic_tunnel_3'>
+      <pose frame=''>-3.5572 4.14859 0.125 0 -0 0</pose>
+      <link name='box'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://traffic_tunnel/materials/scripts</uri>
+              <uri>model://traffic_tunnel/materials/textures</uri>
+              <name>traffic_tunnel</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <inertial>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='traffic_tunnel_4'>
+      <pose frame=''>-2.26356 3.71238 0.125 0 -0 0</pose>
+      <link name='box'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://traffic_tunnel/materials/scripts</uri>
+              <uri>model://traffic_tunnel/materials/textures</uri>
+              <name>traffic_tunnel</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <inertial>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='traffic_tunnel_5'>
+      <pose frame=''>-0.002185 -0.572858 0.125 0 -0 0</pose>
+      <link name='box'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.12 0.025 0.25</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://traffic_tunnel/materials/scripts</uri>
+              <uri>model://traffic_tunnel/materials/textures</uri>
+              <name>traffic_tunnel</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <inertial>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <state world_name='default'>
+      <sim_time>122 813000000</sim_time>
+      <real_time>226 338968070</real_time>
+      <wall_time>1529376923 176780875</wall_time>
+      <iterations>122813</iterations>
+      <model name='ground_plane'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='open_base'>
+        <pose frame=''>0.007627 0.008496 0.008849 -4e-05 -7.5e-05 0.012431</pose>
+        <scale>1 1 1</scale>
+        <link name='base_footprint'>
+          <pose frame=''>0.007627 0.008496 0.008849 -4e-05 -7.5e-05 0.012431</pose>
+          <velocity>0.004534 -0.000496 -0.002196 -9.8e-05 -0.015505 0.000584</velocity>
+          <acceleration>-0.336606 -0.465164 -2.20305 -3.09417 -0.20866 -2.55784</acceleration>
+          <wrench>-21.1285 -29.1979 -138.283 0 -0 0</wrench>
+        </link>
+        <link name='head_pan'>
+          <pose frame=''>0.007227 0.035464 0.900803 1.57479 -6.2e-05 -0.051424</pose>
+          <velocity>-0.002417 -0.014459 0.004049 -0.732274 0.014686 0.01127</velocity>
+          <acceleration>-1.77711 17.3536 4.17622 2.82232 0.629045 -0.383327</acceleration>
+          <wrench>-0.048299 0.471644 0.113503 0 -0 0</wrench>
+        </link>
+        <link name='head_tilt'>
+          <pose frame=''>0.007215 0.035324 0.980816 1.74531 -5.2e-05 -0.051424</pose>
+          <velocity>-0.001384 0.006556 0.002304 0.072093 -0.004222 0.012541</velocity>
+          <acceleration>-0.097613 7.71325 -4.70091 -0.228193 1.24203 -2.43711</acceleration>
+          <wrench>-0.311953 24.65 -15.0232 0 -0 0</wrench>
+        </link>
+        <link name='left_elbow_pitch'>
+          <pose frame=''>0.21441 0.049628 0.578895 1.55855 -0.022004 0.012699</pose>
+          <velocity>0.000969 -4e-05 0.000866 0.001685 0.006387 0.000236</velocity>
+          <acceleration>0.335138 0.126938 0.867125 1.5093 0.96269 1.69362</acceleration>
+          <wrench>0.265789 0.100672 0.687695 0 -0 0</wrench>
+        </link>
+        <link name='left_shoulder_pitch'>
+          <pose frame=''>0.217062 0.05113 0.698856 1.55855 0.022252 0.012157</pose>
+          <velocity>-0.006228 -0.00034 0.001028 0.002578 -0.059919 0.001037</velocity>
+          <acceleration>-2.57476 -0.179973 1.21313 2.88816 0.602393 1.47765</acceleration>
+          <wrench>-1.19529 -0.08355 0.563176 0 -0 0</wrench>
+        </link>
+        <link name='left_shoulder_roll'>
+          <pose frame=''>0.137068 0.050136 0.698853 1.55855 -4.4e-05 0.01243</pose>
+          <velocity>-0.006206 -0.000377 -0.000211 0.001778 -0.015407 0.000475</velocity>
+          <acceleration>-6.20578 -0.35824 0.409374 -1.43384 -0.311437 -2.66667</acceleration>
+          <wrench>-3.2504 -0.187635 0.214418 0 -0 0</wrench>
+        </link>
+        <link name='right_elbow_pitch'>
+          <pose frame=''>-0.201528 0.045279 0.578835 1.5762 -0.033061 -3.12934</pose>
+          <velocity>0.000928 -0.000195 -0.004751 0.00219 0.006316 0.000488</velocity>
+          <acceleration>0.301442 0.021895 -4.74889 1.99091 0.930698 3.13999</acceleration>
+          <wrench>0.239066 0.017364 -3.76623 0 -0 0</wrench>
+        </link>
+        <link name='right_shoulder_pitch'>
+          <pose frame=''>-0.202906 0.04591 0.698825 1.5762 0.011413 -3.1291</pose>
+          <velocity>-0.006242 -0.000561 -0.00477 0.003052 -0.05993 0.000838</velocity>
+          <acceleration>-2.59044 -0.377737 -4.99771 -2.94593 0.587818 1.17089</acceleration>
+          <wrench>-1.20257 -0.175358 -2.32011 0 -0 0</wrench>
+        </link>
+        <link name='right_shoulder_roll'>
+          <pose frame=''>-0.122912 0.046904 0.698833 1.57619 0.000103 -3.12916</pose>
+          <velocity>-0.006224 -0.000512 -0.00376 0.002325 -0.012407 0.000599</velocity>
+          <acceleration>-6.22321 -0.536297 -4.26019 2.26877 0.171048 0.599511</acceleration>
+          <wrench>-3.25953 -0.280896 -2.23136 0 -0 0</wrench>
+        </link>
+        <link name='rim_back_link'>
+          <pose frame=''>0.003898 0.308473 0.018859 1.57051 -0.298858 -3.12915</pose>
+          <velocity>0.004017 -0.000598 -0.003921 -0.357469 -1.00796 0.005502</velocity>
+          <acceleration>4.01913 -0.597685 -3.79392 0.162445 -0.379691 -1.70174</acceleration>
+          <wrench>3.35902 -0.49952 -3.1708 0 -0 0</wrench>
+        </link>
+        <link name='rim_left_link'>
+          <pose frame=''>0.269277 -0.138262 0.018893 1.57003 -0.303223 1.05985</pose>
+          <velocity>0.0043 -0.0003 0.002279 0.535291 -0.557426 0.0008</velocity>
+          <acceleration>4.30036 -0.300287 2.20177 -0.051783 1.40458 0.905881</acceleration>
+          <wrench>3.59406 -0.250967 1.84015 0 -0 0</wrench>
+        </link>
+        <link name='rim_right_link'>
+          <pose frame=''>-0.250296 -0.144721 0.01883 1.57093 -0.278281 -1.0348</pose>
+          <velocity>0.004468 -0.000559 -0.005545 0.687242 0.468356 -0.001124</velocity>
+          <acceleration>4.46855 -0.559553 -5.5626 2.90876 -1.19957 1.5352</acceleration>
+          <wrench>3.73462 -0.467651 -4.64899 0 -0 0</wrench>
+        </link>
+        <link name='roller_e_rim_back_link'>
+          <pose frame=''>-0.009119 0.313811 0.02285 0.002582 -0.298842 -3.13892</pose>
+          <velocity>-4.8e-05 0.000756 -0.018989 -0.326712 -1.00902 0.104231</velocity>
+          <acceleration>-0.047857 0.75559 -18.9894 0.633234 0.666094 -2.49247</acceleration>
+          <wrench>-0.005448 0.08602 -2.16185 0 -0 0</wrench>
+        </link>
+        <link name='roller_e_rim_left_link'>
+          <pose frame=''>0.280398 -0.129673 0.022943 0.002339 -0.303216 1.04945</pose>
+          <velocity>0.002054 -0.002474 0.013106 0.5464 -0.540471 -0.063297</velocity>
+          <acceleration>2.05449 -2.47363 13.1061 -2.90105 1.44326 -0.650896</acceleration>
+          <wrench>0.233893 -0.281611 1.49206 0 -0 0</wrench>
+        </link>
+        <link name='roller_e_rim_right_link'>
+          <pose frame=''>-0.24837 -0.158731 0.022578 0.0031 -0.278259 -1.04727</pose>
+          <velocity>0.00502 -0.003954 -0.020201 0.829822 0.231957 0.063877</velocity>
+          <acceleration>5.02003 -3.95401 -20.2008 3.01979 1.4111 0.61488</acceleration>
+          <wrench>0.571505 -0.450144 -2.29976 0 -0 0</wrench>
+        </link>
+        <link name='roller_n_rim_back_link'>
+          <pose frame=''>0.007819 0.314018 0.03181 -3.12749 -1.2719 -0.002307</pose>
+          <velocity>-0.0091 0.004054 -0.001965 -0.017998 -1.0071 -0.099085</velocity>
+          <acceleration>-9.09971 4.05442 -1.96549 1.89557 -1.24212 -1.66551</acceleration>
+          <wrench>-1.03596 0.461575 -0.223761 0 -0 0</wrench>
+        </link>
+        <link name='roller_n_rim_left_link'>
+          <pose frame=''>0.272086 -0.144477 0.031829 -3.09242 -1.26743 -2.11112</pose>
+          <velocity>-0.002912 -0.00728 0.000525 0.632634 -0.389712 0.05995</velocity>
+          <acceleration>-2.9117 -7.27969 0.52486 2.64385 -0.971607 -0.787482</acceleration>
+          <wrench>-0.331482 -0.828756 0.059753 0 -0 0</wrench>
+        </link>
+        <link name='roller_n_rim_right_link'>
+          <pose frame=''>-0.256921 -0.144327 0.031885 -3.12317 -1.29248 2.09101</pose>
+          <velocity>0.006957 -0.011877 -0.006267 0.727259 0.411401 -0.055339</velocity>
+          <acceleration>6.95662 -11.877 -6.26731 -0.866252 0.323518 -1.7772</acceleration>
+          <wrench>0.791976 -1.35214 -0.713502 0 -0 0</wrench>
+        </link>
+        <link name='roller_ne_rim_back_link'>
+          <pose frame=''>-0.002369 0.302891 0.030835 0.006347 -1.08424 -3.13657</pose>
+          <velocity>-0.008068 0.00362 -0.008299 -0.070936 -1.00832 0.157387</velocity>
+          <acceleration>-8.06794 3.61965 -8.29926 0.633455 0.107266 2.70513</acceleration>
+          <wrench>-0.918495 0.41208 -0.94483 0 -0 0</wrench>
+        </link>
+        <link name='roller_ne_rim_left_link'>
+          <pose frame=''>0.267546 -0.130087 0.030894 0.007124 -1.08862 1.05119</pose>
+          <velocity>-0.002359 -0.006811 0.005743 0.624875 -0.406116 -0.092114</velocity>
+          <acceleration>-2.35852 -6.81076 5.74326 -2.72925 -1.34516 2.62024</acceleration>
+          <wrench>-0.268505 -0.77537 0.653842 0 -0 0</wrench>
+        </link>
+        <link name='roller_ne_rim_right_link'>
+          <pose frame=''>-0.242203 -0.147568 0.030697 0.010309 -1.06364 -1.04678</pose>
+          <velocity>0.006792 -0.010782 -0.012244 0.75169 0.375153 0.110203</velocity>
+          <acceleration>6.79182 -10.7821 -12.2437 -1.40974 -1.34003 -0.221866</acceleration>
+          <wrench>0.773215 -1.22749 -1.39389 0 -0 0</wrench>
+        </link>
+        <link name='roller_nw_rim_back_link'>
+          <pose frame=''>0.015942 0.303119 0.025193 -3.13624 -0.486518 0.001469</pose>
+          <velocity>-0.002354 0.001706 0.010143 -0.272813 -1.01184 -0.151176</velocity>
+          <acceleration>-2.35421 1.70605 10.1428 -2.56796 -0.487784 -2.1907</acceleration>
+          <wrench>-0.268015 0.194225 1.1547 0 -0 0</wrench>
+        </link>
+        <link name='roller_nw_rim_left_link'>
+          <pose frame=''>0.258603 -0.14604 0.025172 -3.13582 -0.482123 -2.09302</pose>
+          <velocity>0.000828 -0.003734 -0.007865 0.565207 -0.515021 0.09093</velocity>
+          <acceleration>0.827531 -3.73418 -7.86489 -2.61388 0.168258 -3.08641</acceleration>
+          <wrench>0.09421 -0.425118 -0.895378 0 -0 0</wrench>
+        </link>
+        <link name='roller_nw_rim_right_link'>
+          <pose frame=''>-0.251615 -0.131727 0.025433 -3.13511 -0.507088 2.0941</pose>
+          <velocity>0.005505 -0.006443 0.003213 0.814571 0.275807 -0.099614</velocity>
+          <acceleration>5.50463 -6.44296 3.21268 -2.01982 0.975326 2.64307</acceleration>
+          <wrench>0.626675 -0.733499 0.365748 0 -0 0</wrench>
+        </link>
+        <link name='roller_s_rim_back_link'>
+          <pose frame=''>-0.00015 0.313912 0.006002 0.119959 1.28515 -3.00394</pose>
+          <velocity>0.014726 -0.001563 -0.032675 3.06383 0.326233 2.99737</velocity>
+          <acceleration>14.7256 -1.56256 -32.6746 -1.46038 0.34494 1.16162</acceleration>
+          <wrench>1.67643 -0.177889 -3.71984 0 -0 0</wrench>
+        </link>
+        <link name='roller_s_rim_left_link'>
+          <pose frame=''>0.276038 -0.137421 0.006061 1.01457 1.0089 2.14159</pose>
+          <velocity>0.008092 0.007285 0.019579 -1.18496 1.30519 -0.003311</velocity>
+          <acceleration>8.092 7.28503 19.5788 0.083362 1.12947 -2.30103</acceleration>
+          <wrench>0.921233 0.829365 2.22895 0 -0 0</wrench>
+        </link>
+        <link name='roller_s_rim_right_link'>
+          <pose frame=''>-0.253112 -0.150718 0.005909 1.00749 1.07403 0.008117</pose>
+          <velocity>-0.0026 0.006496 -0.032938 -1.91115 -1.09277 0.234883</velocity>
+          <acceleration>-2.60029 6.49572 -32.9379 1.51967 -1.11426 0.315375</acceleration>
+          <wrench>-0.29603 0.739505 -3.74981 0 -0 0</wrench>
+        </link>
+        <link name='roller_se_rim_back_link'>
+          <pose frame=''>-0.008011 0.302818 0.012512 0.043167 0.484814 -3.0386</pose>
+          <velocity>0.010583 -0.000745 -0.01145 -0.034331 -1.00797 -0.023814</velocity>
+          <acceleration>10.5833 -0.744731 -11.4504 -2.72559 -0.451158 1.14985</acceleration>
+          <wrench>1.20486 -0.084784 -1.30357 0 -0 0</wrench>
+        </link>
+        <link name='roller_se_rim_left_link'>
+          <pose frame=''>0.270351 -0.1251 0.012595 0.017431 0.481935 1.09628</pose>
+          <velocity>0.006959 0.003598 0.008448 0.626459 -0.401694 0.022628</velocity>
+          <acceleration>6.95891 3.59827 8.44826 -0.083409 -1.14229 -1.5821</acceleration>
+          <wrench>0.792237 0.409645 0.961793 0 -0 0</wrench>
+        </link>
+        <link name='roller_se_rim_right_link'>
+          <pose frame=''>-0.239515 -0.152094 0.012261 0.032663 0.506214 -0.968603</pose>
+          <velocity>0.001462 0.004084 -0.014137 0.718882 0.427061 0.000494</velocity>
+          <acceleration>1.46184 4.08417 -14.1367 2.56129 -0.133023 0.15555</acceleration>
+          <wrench>0.166423 0.464962 -1.6094 0 -0 0</wrench>
+        </link>
+        <link name='roller_sw_rim_back_link'>
+          <pose frame=''>0.010291 0.303039 0.006937 -2.70889 1.04943 0.506179</pose>
+          <velocity>0.014474 -0.002621 0.01816 -1.20393 1.12396 -0.995968</velocity>
+          <acceleration>14.4743 -2.62051 18.1596 -0.362239 1.44409 -0.058245</acceleration>
+          <wrench>1.64782 -0.298332 2.06738 0 -0 0</wrench>
+        </link>
+        <link name='roller_sw_rim_left_link'>
+          <pose frame=''>0.261413 -0.14105 0.006917 -2.69916 1.0444 -1.58198</pose>
+          <velocity>0.006495 0.007286 -0.015888 -1.6594 1.09469 0.275508</velocity>
+          <acceleration>6.49525 7.28601 -15.8881 -3.04759 -0.772716 -1.29123</acceleration>
+          <wrench>0.739451 0.829476 -1.80878 0 -0 0</wrench>
+        </link>
+        <link name='roller_sw_rim_right_link'>
+          <pose frame=''>-0.248932 -0.136262 0.007051 -2.71802 1.02319 2.59079</pose>
+          <velocity>-0.003575 0.005329 0.008168 -0.097054 -1.45834 -1.67107</velocity>
+          <acceleration>-3.5748 5.32909 8.16847 -3.00067 -0.887093 -2.06145</acceleration>
+          <wrench>-0.406973 0.60669 0.929939 0 -0 0</wrench>
+        </link>
+        <link name='roller_w_rim_back_link'>
+          <pose frame=''>0.016777 0.314133 0.01484 3.13827 0.298877 0.001535</pose>
+          <velocity>0.008312 5e-05 0.011863 0.111058 -0.996902 -0.030287</velocity>
+          <acceleration>8.31166 0.050443 11.8634 -2.6217 0.98464 0.109295</acceleration>
+          <wrench>0.946241 0.005743 1.35059 0 -0 0</wrench>
+        </link>
+        <link name='roller_w_rim_left_link'>
+          <pose frame=''>0.267748 -0.152232 0.014822 3.13809 0.303213 -2.09343</pose>
+          <velocity>0.005852 0.00237 -0.008037 0.661871 -0.320347 0.013819</velocity>
+          <acceleration>5.8522 2.36957 -8.03683 2.71529 1.12915 -2.0283</acceleration>
+          <wrench>0.666244 0.269764 -0.914953 0 -0 0</wrench>
+        </link>
+        <link name='roller_w_rim_right_link'>
+          <pose frame=''>-0.261678 -0.136329 0.015106 3.13792 0.278295 2.09395</pose>
+          <velocity>0.002686 0.002009 0.005554 0.683696 0.462427 -0.013721</velocity>
+          <acceleration>2.68635 2.00881 5.55402 1.41457 -1.54777 -1.03608</acceleration>
+          <wrench>0.305827 0.228693 0.632297 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='traffic_bar_up'>
+        <pose frame=''>-0.979241 -1.73114 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='traffic_bar_up'>
+          <pose frame=''>-0.979241 -1.73114 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='traffic_light_red'>
+        <pose frame=''>-1.6683 -2.01154 0 0 0 -1.5708</pose>
+        <scale>1 1 1</scale>
+        <link name='traffic_light_red'>
+          <pose frame=''>-1.6683 -2.01154 0 0 0 -1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='traffic_parking'>
+        <pose frame=''>-0.003051 -2.07647 0.125 -1e-06 -3e-06 -3e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='box'>
+          <pose frame=''>-0.003051 -2.07647 0.125 -1e-06 -3e-06 -3e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.071975 -0.014995 -0.054038 0.119947 -0.57576 0</acceleration>
+          <wrench>-0.071975 -0.014995 -0.054038 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='traffic_tunnel'>
+        <pose frame=''>0.723438 -1.921 0.125 -2e-06 5e-06 1.3e-05</pose>
+        <scale>1 1 1</scale>
+        <link name='box'>
+          <pose frame=''>0.723438 -1.921 0.125 -2e-06 5e-06 1.3e-05</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.072084 -0.015019 -0.038481 0.120148 -0.576672 0</acceleration>
+          <wrench>-0.072084 -0.015019 -0.038481 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='traffic_tunnel_0'>
+        <pose frame=''>1.7458 0.286572 0.125001 1e-06 -1.2e-05 -1.58629</pose>
+        <scale>1 1 1</scale>
+        <link name='box'>
+          <pose frame=''>1.7458 0.286572 0.125001 1e-06 -1.2e-05 -1.58629</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.013903 -0.072325 -0.03611 0.578601 0.11122 0</acceleration>
+          <wrench>0.013903 -0.072325 -0.03611 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='traffic_tunnel_1'>
+        <pose frame=''>1.81733 -0.843183 0.125001 1e-06 1.1e-05 -1.65846</pose>
+        <scale>1 1 1</scale>
+        <link name='box'>
+          <pose frame=''>1.81733 -0.843183 0.125001 1e-06 1.1e-05 -1.65846</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.021276 0.070509 -0.03611 -0.564069 0.170207 -0</acceleration>
+          <wrench>0.021276 0.070509 -0.03611 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='traffic_tunnel_2'>
+        <pose frame=''>-3.2142 0.869311 0.124991 -1e-06 5e-06 5e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='box'>
+          <pose frame=''>-3.2142 0.869311 0.124991 -1e-06 5e-06 5e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -9.8 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='traffic_tunnel_3'>
+        <pose frame=''>-3.5572 4.14859 0.125001 1e-06 -1.7e-05 3e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='box'>
+          <pose frame=''>-3.5572 4.14859 0.125001 1e-06 -1.7e-05 3e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.072101 0.015022 -0.03609 -0.120171 0.576801 0</acceleration>
+          <wrench>0.072101 0.015022 -0.03609 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='traffic_tunnel_4'>
+        <pose frame=''>-2.26356 3.71238 0.125001 -2e-06 -2.3e-05 2e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='box'>
+          <pose frame=''>-2.26356 3.71238 0.125001 -2e-06 -2.3e-05 2e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.0721 -0.015021 -0.036108 0.120168 0.576792 -0</acceleration>
+          <wrench>0.0721 -0.015021 -0.036108 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='traffic_tunnel_5'>
+        <pose frame=''>-0.956895 3.66473 0.125 -3e-06 -1e-06 2e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='box'>
+          <pose frame=''>-0.956895 3.66473 0.125 -3e-06 -1e-06 2e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.072102 -0.015021 -0.036111 0.120167 0.576818 -0</acceleration>
+          <wrench>0.072102 -0.015021 -0.036111 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose frame=''>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>4.59679 -5.07466 2.82139 0 0.275643 2.35619</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>

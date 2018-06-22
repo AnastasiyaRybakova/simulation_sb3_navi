@@ -1,0 +1,8 @@
+prefix=/home/sjlee/catkin_ws/src/silbot3_src/silbot3_core/devel
+
+Name: silbot3_core
+Description: Description of silbot3_core
+Version: 0.1.0
+Cflags: 
+Libs: -L/home/sjlee/catkin_ws/src/silbot3_src/silbot3_core/devel/lib -lsilbot3_core
+Requires: roscpp sensor_msgs std_msgs silbot3_common_tools tf nav_msgs

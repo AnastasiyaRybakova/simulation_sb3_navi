@@ -1,0 +1,612 @@
+<?xml version="1.0"?>
+<!--silbot3-->
+<robot name="silbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Constants for robot dimensions -->
+  <xacro:property name="PI" value="3.14159265358969"/>
+
+  <!-- Import all Gazebo customization elements, including Gazebo colors -->
+  <xacro:include filename="$(find silbot3_description)/robots/silbot.gazebo"/>
+
+  <!-- Used for fixing robot to Gazebo 'base_link' -->
+  <link name="world"/>
+
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+  <!-- -->
+  
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="7.58222085594279E-07  0.0240203938745347  0.303246791234953"
+        rpy="0 0 0" />
+      <mass
+        value="62.7691092370317" />
+      <inertia
+        ixx="4.50842846453512"
+        ixy="-1.06126672936263E-05"
+        ixz="-0.000498782139427751"
+        iyy="1.12012861197416"
+        iyz="0.214465641656845"
+        izz="4.45203233376493" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/base_link.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/base_link.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="head_pan">
+    <inertial>
+      <origin
+        xyz="-2.62345537484504E-18 0.0434442547963301 4.00317448634446E-09"
+        rpy="0 0 0" />
+      <mass
+        value="0.0271784628013319" />
+      <inertia
+        ixx="1.80957544896381E-05"
+        ixy="1.89945655284013E-21"
+        ixz="-2.48736511134325E-11"
+        iyy="1.43652425083494E-06"
+        iyz="-1.55760485502358E-12"
+        izz="1.80877283143939E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/head_pan.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/head_pan.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="head_pan"
+    type="revolute">
+    <origin
+      xyz="0 0.0270000000000001 0.882000000000001"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="head_pan" />
+    <axis
+      xyz="0 1 0" />
+    <dynamics damping="0.9"/>
+    <limit effort="30" velocity="1.57" lower="-1.13" upper="1.13" />
+    <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-1.13" soft_upper_limit="1.13" />
+  </joint>
+  <link
+    name="head_tilt">
+    <inertial>
+      <origin
+        xyz="3.35509416417473E-07 0.000180320997616445 0.098466219968126"
+        rpy="0 0 0" />
+      <mass
+        value="3.1958001417964" />
+      <inertia
+        ixx="0.0161280224212103"
+        ixy="-3.74548687820398E-07"
+        ixz="4.10569883072921E-08"
+        iyy="0.0120783645510828"
+        iyz="6.02015212726225E-05"
+        izz="0.0190874850995971" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/head_tilt.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/head_tilt.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="head_tilt"
+    type="revolute">
+    <origin
+      xyz="0 0.0800000000000001 0"
+      rpy="0 0 0" />
+    <parent
+      link="head_pan" />
+    <child
+      link="head_tilt" />
+    <axis
+      xyz="-1 0 0" />
+    <dynamics damping="0.9"/>
+      <limit effort="30" velocity="1.57" lower="-0.17" upper="0.61" />
+      <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-0.17" soft_upper_limit="0.61" />
+  </joint>
+  <link
+    name="left_shoulder_roll">
+    <inertial>
+      <origin
+        xyz="0.0402238451768937 5.90727256000179E-09 -1.06105921389432E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.523769709828829" />
+      <inertia
+        ixx="0.00050893924644715"
+        ixy="1.22760205520854E-11"
+        ixz="-3.81706313132774E-10"
+        iyy="0.000694869826637859"
+        iyz="8.25920040594555E-11"
+        izz="0.000695111477814235" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/left_shoulder_roll.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/left_shoulder_roll.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_shoulder_roll"
+    type="revolute">
+    <origin
+      xyz="0.13 0.0399999808735008 0.68"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_shoulder_roll" />
+    <axis xyz="-1 0 0" />
+    <dynamics damping="0.1"/>
+      <limit effort="30" velocity="1.57" lower="-1.57" upper="2.97" />
+      <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-1.57" soft_upper_limit="2.97" />
+  </joint>
+  <link
+    name="left_shoulder_pitch">
+    <inertial>
+      <origin
+        xyz="0.00447219277506278 -0.0608811930915962 8.57428975042929E-10"
+        rpy="0 0 0" />
+      <mass
+        value="0.464234298040107" />
+      <inertia
+        ixx="0.00110737707119681"
+        ixy="-3.01462515992655E-06"
+        ixz="6.7334317769391E-13"
+        iyy="0.000491853620615109"
+        iyz="1.01556886229373E-11"
+        izz="0.000794791705256485" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/left_shoulder_pitch.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/left_shoulder_pitch.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_shoulder_pitch"
+    type="revolute">
+    <origin
+      xyz="0.08 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="left_shoulder_roll" />
+    <child
+      link="left_shoulder_pitch" />
+    <axis
+      xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+    <limit effort="30" velocity="1.57" lower="-0.35" upper="2.09" />
+    <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-0.35" soft_upper_limit="2.09" />
+  </joint>
+  <link
+    name="left_elbow_pitch">
+    <inertial>
+      <origin
+        xyz="-0.00273775922544003 -0.0992751990429413 -3.16663074234613E-09"
+        rpy="0 0 0" />
+      <mass
+        value="0.793074966981515" />
+      <inertia
+        ixx="0.00370912425943639"
+        ixy="-0.000111595277425925"
+        ixz="-1.37331052008159E-09"
+        iyy="0.000538057358277077"
+        iyz="6.96382689691919E-11"
+        izz="0.00343365780647525" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/left_elbow_pitch.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/left_elbow_pitch.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_elbow_pitch"
+    type="revolute">
+    <origin
+      xyz="0 -0.12 0"
+      rpy="0 0 0" />
+    <parent
+      link="left_shoulder_pitch" />
+    <child
+      link="left_elbow_pitch" />
+    <axis
+      xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+      <limit effort="30" velocity="1.57" lower="-1.57" upper="0.35" />
+      <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-1.57" soft_upper_limit="0.35" />
+  </joint>
+  <link
+    name="right_shoulder_roll">
+    <inertial>
+      <origin
+        xyz="0.0402238451768937 5.90727256000179E-09 -1.06105921444943E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.52376970982883" />
+      <inertia
+        ixx="0.00050893924644715"
+        ixy="1.22760207242185E-11"
+        ixz="-3.81706313112343E-10"
+        iyy="0.00069486982663786"
+        iyz="8.25920043162945E-11"
+        izz="0.000695111477814236" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/right_shoulder_roll.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/right_shoulder_roll.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_shoulder_roll"
+    type="revolute">
+    <origin
+      xyz="-0.13 0.0399999808735008 0.68"
+      rpy="1.5707963267949 0 3.14159265358979" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_shoulder_roll" />
+    <axis
+      xyz="1 0 0" />
+    <dynamics damping="0.1"/>
+    <limit effort="30" velocity="1.57" lower="-1.57" upper="2.97" />
+    <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-1.57" soft_upper_limit="2.97" />
+  </joint>
+  <link
+    name="right_shoulder_pitch">
+    <inertial>
+      <origin
+        xyz="0.00447219277506244 -0.060881193091596 8.57428975042929E-10"
+        rpy="0 0 0" />
+      <mass
+        value="0.464234298040107" />
+      <inertia
+        ixx="0.0011073770711968"
+        ixy="-3.01462515990822E-06"
+        ixz="6.7334161954273E-13"
+        iyy="0.000491853620615157"
+        iyz="1.01556880691214E-11"
+        izz="0.000794791705256518" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/right_shoulder_pitch.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/right_shoulder_pitch.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_shoulder_pitch"
+    type="revolute">
+    <origin
+      xyz="0.0799999999999999 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="right_shoulder_roll" />
+    <child
+      link="right_shoulder_pitch" />
+    <axis
+      xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+      <limit effort="30" velocity="1.57" lower="-0.35" upper="2.09" />
+      <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-0.35" soft_upper_limit="2.09" />
+  </joint>
+  <link
+    name="right_elbow_pitch">
+    <inertial>
+      <origin
+        xyz="-0.00273775922544006 -0.0992751990429413 -3.16663073540724E-09"
+        rpy="0 0 0" />
+      <mass
+        value="0.793074966981515" />
+      <inertia
+        ixx="0.0037091242594364"
+        ixy="-0.000111595277425924"
+        ixz="-1.37331052014872E-09"
+        iyy="0.000538057358277077"
+        iyz="6.96382689647818E-11"
+        izz="0.00343365780647526" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/right_elbow_pitch.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://silbot3_description/meshes/right_elbow_pitch.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_elbow_pitch"
+    type="revolute">
+    <origin
+      xyz="0 -0.12 0"
+      rpy="0 0 0" />
+    <parent
+      link="right_shoulder_pitch" />
+    <child
+      link="right_elbow_pitch" />
+    <axis
+      xyz="0 0 11" />
+    <dynamics damping="0.1"/>
+      <limit effort="30" velocity="1.57" lower="-1.57" upper="0.35" />
+      <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-1.57" soft_upper_limit="0.35" />
+  </joint>
+
+  
+ <transmission name="tran1">
+<!-- problem : [FATAL] [1503662181.840052723, 0.017000000]: No matching hardware interface found for 'hardware_interface/EffortJointInterface solve: remove 'hardware_interface'-->
+
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="head_pan">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="head_tilt">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_shoulder_roll">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor3">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <transmission name="tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_shoulder_pitch">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor4">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_elbow_pitch">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor5">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_shoulder_roll">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor6">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran7">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_shoulder_pitch">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor7">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran8">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_elbow_pitch">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor8">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran9">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="fixed">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor9">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+</robot>

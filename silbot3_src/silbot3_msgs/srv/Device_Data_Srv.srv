@@ -1,0 +1,6 @@
+string command
+---
+bool flag
+int32[] iParams
+float32[] fParams
+float64[] dParams

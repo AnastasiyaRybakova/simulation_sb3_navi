@@ -1,0 +1,1260 @@
+<?xml version="1.0"?>
+<robot
+	xmlns:xacro="http://www.ros.org/wiki/xacro"
+	name="open_base"
+>
+	<xacro:include filename="$(find open_base)/xacro/rim.urdf.xacro"/>
+  	<!-- Constants for robot dimensions -->
+  	<xacro:property name="M_PI" value="3.1415926535897931" />
+
+  	
+
+  <!-- kinect -->
+  <xacro:property name="kinect_link" value="0.03" /> <!-- Size of square 'camera' box -->
+
+
+
+  <link name="base_footprint"/>
+
+  <link name="base_link">
+    <inertial>
+      <origin
+        xyz="7.58222085594279E-07  0.0240203938745347  0.303246791234953"
+        rpy="0 0 0" />
+        
+      <mass
+        value="62.7691092370317" />
+      <inertia
+        ixx="4.50842846453512"
+        ixy="-1.06126672936263E-05"
+        ixz="-0.000498782139427751"
+        iyy="1.12012861197416"
+        iyz="0.214465641656845"
+        izz="4.45203233376493" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/base_link.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/base_link.stl" />
+      </geometry>
+    </collision>
+
+  </link>
+
+  <joint name="base_footprint" type="fixed">
+    <parent link="base_footprint" />
+    <child link="base_link"/>
+    <origin xyz="0 0 0.01" rpy="0 0 0"/>
+  </joint>
+
+
+
+ <!-- Hokuyo Laser --> 
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 -0.17 0.23" rpy="0 0 -1.57"/>
+    <parent link="base_link"/>
+    <child link="open_base/hokuyo_link"/>
+  </joint>
+    
+  <link name="open_base/hokuyo_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://open_base/mesh/sensor/hokuyo.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+  <!-- Hokuyo Laser -->
+
+
+  <!-- Kinect Xtion -->
+  <joint name = "kinect_joint" type="fixed">
+    <axis xyz="1 0 0" />
+    <origin xyz="0 -0.1 0.6" rpy="0 0 -1.57"/>
+    <parent link="base_link"/>
+    <child link="kinect_link"/>
+  </joint>
+  <!-- Kinect Xtion -->
+
+  <link name="kinect_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="${kinect_link} ${kinect_link} ${kinect_link}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://open_base/mesh/sensor/xtion_pro_camera.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+  <!-- Kinect Xtion -->
+
+  <link
+    name="head_pan">
+    <inertial>
+      <origin
+        xyz="-2.62345537484504E-18 0.0434442547963301 4.00317448634446E-09"
+        rpy="0 0 0" />
+      <mass
+        value="0.0271784628013319" />
+      <inertia
+        ixx="1.80957544896381E-05"
+        ixy="1.89945655284013E-21"
+        ixz="-2.48736511134325E-11"
+        iyy="1.43652425083494E-06"
+        iyz="-1.55760485502358E-12"
+        izz="1.80877283143939E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/head_pan.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/head_pan.stl" />
+      </geometry>
+    </collision>
+    </link>
+
+  <!-- Sonar sensor -->
+   <link name="sonar_1_link" type ="ray">
+            <visual>
+                    <geometry>
+                            <box size="0.016 0.044 0.02"/>
+                    </geometry>
+                    <origin xyz="${0.016/2} 0 0" rpy="0 0 0"/>
+                    <material name="green">
+                            <color rgba="0 1 0 0.8"/>
+                    </material>
+            </visual>
+    </link>
+    <joint
+    name="sonar_1_joint" type="fixed">
+    	<origin xyz="0 -0.2 0.15" rpy="0 0 -1.57"/>
+    	<parent link="base_link" />
+    	<child link="sonar_1_link" />
+    	<axis
+      		xyz="1 0 0" />
+    </joint>
+
+   <link name="sonar_2_link" type ="ray">
+            <visual>
+                    <geometry>
+                            <box size="0.016 0.044 0.02"/>
+                    </geometry>
+                    <origin xyz="${0.016/2} 0 0" rpy="0 0 0"/>
+                    <material name="green">
+                            <color rgba="0 1 0 0.8"/>
+                    </material>
+            </visual>
+    </link>
+    <joint
+    name="sonar_2_joint" type="fixed">
+    	<origin xyz="-0.141421 -0.141421 0.15" rpy="0 0 -2.35619"/>
+    	<parent link="base_link" />
+    	<child link="sonar_2_link" />
+    	<axis
+      		xyz="1 0 0" />
+    </joint>
+
+   <link name="sonar_3_link" type ="ray">
+            <visual>
+                    <geometry>
+                            <box size="0.016 0.044 0.02"/>
+                    </geometry>
+                    <origin xyz="${0.016/2} 0 0" rpy="0 0 0"/>
+                    <material name="green">
+                            <color rgba="0 1 0 0.8"/>
+                    </material>
+            </visual>
+    </link>
+    <joint
+    name="sonar_3_joint" type="fixed">
+    	<origin xyz="-0.2 0.0 0.15" rpy="0 0 -3.14159"/>
+    	<parent link="base_link" />
+    	<child link="sonar_3_link" />
+    	<axis
+      		xyz="1 0 0" />
+    </joint>
+
+   <link name="sonar_4_link" type ="ray">
+            <visual>
+                    <geometry>
+                            <box size="0.016 0.044 0.02"/>
+                    </geometry>
+                    <origin xyz="${0.016/2} 0 0" rpy="0 0 0"/>
+                    <material name="green">
+                            <color rgba="0 1 0 0.8"/>
+                    </material>
+            </visual>
+    </link>
+    <joint
+    name="sonar_4_joint" type="fixed">
+    	<origin xyz="-0.141421 0.141421 0.15" rpy="0 0 -3.92699"/>
+    	<parent link="base_link" />
+    	<child link="sonar_4_link" />
+    	<axis
+      		xyz="1 0 0" />
+    </joint>
+
+   <link name="sonar_5_link" type ="ray">
+            <visual>
+                    <geometry>
+                            <box size="0.016 0.044 0.02"/>
+                    </geometry>
+                    <origin xyz="${0.016/2} 0 0" rpy="0 0 0"/>
+                    <material name="green">
+                            <color rgba="0 1 0 0.8"/>
+                    </material>
+            </visual>
+    </link>
+    <joint
+    name="sonar_5_joint" type="fixed">
+    	<origin xyz="0 0.2 0.15" rpy="0 0 -4.71239"/>
+    	<parent link="base_link" />
+    	<child link="sonar_5_link" />
+    	<axis
+      		xyz="1 0 0" />
+    </joint>
+
+   <link name="sonar_6_link" type ="ray">
+            <visual>
+                    <geometry>
+                            <box size="0.016 0.044 0.02"/>
+                    </geometry>
+                    <origin xyz="${0.016/2} 0 0" rpy="0 0 0"/>
+                    <material name="green">
+                            <color rgba="0 1 0 0.8"/>
+                    </material>
+            </visual>
+    </link>
+    <joint
+    name="sonar_6_joint" type="fixed">
+    	<origin xyz="0.141421 0.141421 0.15" rpy="0 0 -5.49779"/>
+    	<parent link="base_link" />
+    	<child link="sonar_6_link" />
+    	<axis
+      		xyz="1 0 0" />
+    </joint>
+
+   <link name="sonar_7_link" type ="ray">
+            <visual>
+                    <geometry>
+                            <box size="0.016 0.044 0.02"/>
+                    </geometry>
+                    <origin xyz="${0.016/2} 0 0" rpy="0 0 0"/>
+                    <material name="green">
+                            <color rgba="0 1 0 0.8"/>
+                    </material>
+            </visual>
+    </link>
+    <joint
+    name="sonar_7_joint" type="fixed">
+    	<origin xyz="0.2 0.0 0.15" rpy="0 0 -6.28319"/>
+    	<parent link="base_link" />
+    	<child link="sonar_7_link" />
+    	<axis
+      		xyz="1 0 0" />
+    </joint>
+
+   <link name="sonar_8_link" type ="ray">
+            <visual>
+                    <geometry>
+                            <box size="0.016 0.044 0.02"/>
+                    </geometry>
+                    <origin xyz="${0.016/2} 0 0" rpy="0 0 0"/>
+                    <material name="green">
+                            <color rgba="0 1 0 0.8"/>
+                    </material>
+            </visual>
+    </link>
+    <joint
+    name="sonar_8_joint" type="fixed">
+    	<origin xyz="0.141421 -0.141421 0.15" rpy="0 0 -7.06858"/>
+    	<parent link="base_link" />
+    	<child link="sonar_8_link" />
+    	<axis
+      		xyz="1 0 0" />
+    </joint>
+
+
+
+  <!-- Sonar sensor -->
+
+  <joint
+    name="head_pan"
+    type="revolute">
+    <origin
+      xyz="0 0.0270000000000001 0.882000000000001"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="head_pan" />
+    <axis
+      xyz="0 1 0" />
+    <dynamics damping="0.1"/>
+    <limit effort="30" velocity="1.57" lower="-1.13" upper="1.13" />
+    <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-1.13" soft_upper_limit="1.13" />
+  </joint>
+  <link
+    name="head_tilt">
+    <inertial>
+      <origin
+        xyz="3.35509416417473E-07 0.000180320997616445 0.098466219968126"
+        rpy="0 0 0" />
+      <mass
+        value="3.1958001417964" />
+      <inertia
+        ixx="0.0161280224212103"
+        ixy="-3.74548687820398E-07"
+        ixz="4.10569883072921E-08"
+        iyy="0.0120783645510828"
+        iyz="6.02015212726225E-05"
+        izz="0.0190874850995971" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/head_tilt.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+       <origin
+         xyz="0 0 0"
+         rpy="0 0 0" />
+       <geometry>
+         <mesh
+           filename="package://open_base/mesh/head_tilt.stl" />
+       </geometry>
+     </collision> 
+  </link>
+  <joint
+    name="head_tilt"
+    type="revolute">
+    <origin
+      xyz="0 0.0800000000000001 0"
+      rpy="0 0 0" />
+    <parent
+      link="head_pan" />
+    <child
+      link="head_tilt" />
+    <axis
+      xyz="-1 0 0" />
+    <dynamics damping="0.01"/>
+      <limit effort="30" velocity="1.57" lower="-0.17" upper="0.61" />
+      <!--safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-0.17" soft_upper_limit="0.61" /i-->
+  </joint>
+  <link
+    name="left_shoulder_roll">
+    <inertial>
+      <origin
+        xyz="0.0402238451768937 5.90727256000179E-09 -1.06105921389432E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.523769709828829" />
+      <inertia
+        ixx="0.00050893924644715"
+        ixy="1.22760205520854E-11"
+        ixz="-3.81706313132774E-10"
+        iyy="0.000694869826637859"
+        iyz="8.25920040594555E-11"
+        izz="0.000695111477814235" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/left_shoulder_roll.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual> 
+
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/left_shoulder_roll.stl" />
+      </geometry>
+    </collision>
+   
+    </link>
+  <joint
+    name="left_shoulder_roll"
+    type="revolute">
+    <origin
+      xyz="0.13 0.0399999808735008 0.68"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_shoulder_roll" />
+    <axis xyz="-1 0 0" />
+    <dynamics damping="0.1"/>
+      <limit effort="30" velocity="1.57" lower="-1.57" upper="2.97" />
+      <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-1.57" soft_upper_limit="2.97" />
+  </joint>
+  <link
+    name="left_shoulder_pitch">
+    <inertial>
+      <origin
+        xyz="0.00447219277506278 -0.0608811930915962 8.57428975042929E-10"
+        rpy="0 0 0" />
+      <mass
+        value="0.464234298040107" />
+      <inertia
+        ixx="0.00110737707119681"
+        ixy="-3.01462515992655E-06"
+        ixz="6.7334317769391E-13"
+        iyy="0.000491853620615109"
+        iyz="1.01556886229373E-11"
+        izz="0.000794791705256485" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/left_shoulder_pitch.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/left_shoulder_pitch.stl" />
+      </geometry>
+    </collision>
+ 
+    </link>
+  <joint
+    name="left_shoulder_pitch"
+    type="revolute">
+    <origin
+      xyz="0.08 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="left_shoulder_roll" />
+    <child
+      link="left_shoulder_pitch" />
+    <axis
+      xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+    <limit effort="30" velocity="1.57" lower="-0.35" upper="2.09" />
+    <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-0.35" soft_upper_limit="2.09" />
+  </joint>
+  <link
+    name="left_elbow_pitch">
+    <inertial>
+      <origin
+        xyz="-0.00273775922544003 -0.0992751990429413 -3.16663074234613E-09"
+        rpy="0 0 0" />
+      <mass
+        value="0.793074966981515" />
+      <inertia
+        ixx="0.00370912425943639"
+        ixy="-0.000111595277425925"
+        ixz="-1.37331052008159E-09"
+        iyy="0.000538057358277077"
+        iyz="6.96382689691919E-11"
+        izz="0.00343365780647525" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/left_elbow_pitch.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/left_elbow_pitch.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_elbow_pitch"
+    type="revolute">
+    <origin
+      xyz="0 -0.12 0"
+      rpy="0 0 0" />
+    <parent
+      link="left_shoulder_pitch" />
+    <child
+      link="left_elbow_pitch" />
+    <axis
+      xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+      <limit effort="30" velocity="1.57" lower="-1.57" upper="0.35" />
+      <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-1.57" soft_upper_limit="0.35" />
+  </joint>
+  <link
+    name="right_shoulder_roll">
+    <inertial>
+      <origin
+        xyz="0.0402238451768937 5.90727256000179E-09 -1.06105921444943E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.52376970982883" />
+      <inertia
+        ixx="0.00050893924644715"
+        ixy="1.22760207242185E-11"
+        ixz="-3.81706313112343E-10"
+        iyy="0.00069486982663786"
+        iyz="8.25920043162945E-11"
+        izz="0.000695111477814236" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/right_shoulder_roll.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/right_shoulder_roll.stl" />
+      </geometry>
+   </collision>
+  </link>
+  <joint
+    name="right_shoulder_roll"
+    type="revolute">
+    <origin
+      xyz="-0.13 0.0399999808735008 0.68"
+      rpy="1.5707963267949 0 3.14159265358979" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_shoulder_roll" />
+    <axis
+      xyz="1 0 0" />
+    <dynamics damping="0.1"/>
+    <limit effort="30" velocity="1.57" lower="-1.57" upper="2.97" />
+    <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-1.57" soft_upper_limit="2.97" />
+  </joint>
+  <link
+    name="right_shoulder_pitch">
+    <inertial>
+      <origin
+        xyz="0.00447219277506244 -0.060881193091596 8.57428975042929E-10"
+        rpy="0 0 0" />
+      <mass
+        value="0.464234298040107" />
+      <inertia
+        ixx="0.0011073770711968"
+        ixy="-3.01462515990822E-06"
+        ixz="6.7334161954273E-13"
+        iyy="0.000491853620615157"
+        iyz="1.01556880691214E-11"
+        izz="0.000794791705256518" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/right_shoulder_pitch.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/right_shoulder_pitch.stl" />
+      </geometry>
+    </collision>
+   </link>
+  <joint
+    name="right_shoulder_pitch"
+    type="revolute">
+    <origin
+      xyz="0.0799999999999999 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="right_shoulder_roll" />
+    <child
+      link="right_shoulder_pitch" />
+    <axis
+      xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+      <limit effort="30" velocity="1.57" lower="-0.35" upper="2.09" />
+      <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-0.35" soft_upper_limit="2.09" />
+  </joint>
+  <link
+    name="right_elbow_pitch">
+    <inertial>
+      <origin
+        xyz="-0.00273775922544006 -0.0992751990429413 -3.16663073540724E-09"
+        rpy="0 0 0" />
+      <mass
+        value="0.793074966981515" />
+      <inertia
+        ixx="0.0037091242594364"
+        ixy="-0.000111595277425924"
+        ixz="-1.37331052014872E-09"
+        iyy="0.000538057358277077"
+        iyz="6.96382689647818E-11"
+        izz="0.00343365780647526" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/right_elbow_pitch.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual> 
+
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://open_base/mesh/right_elbow_pitch.stl" />
+      </geometry>
+    </collision> 
+  </link>
+  <joint
+    name="right_elbow_pitch"
+    type="revolute">
+    <origin
+      xyz="0 -0.12 0"
+      rpy="0 0 0" />
+    <parent
+      link="right_shoulder_pitch" />
+    <child
+      link="right_elbow_pitch" />
+    <axis
+      xyz="0 0 11" />
+    <dynamics damping="0.1"/>
+      <limit effort="30" velocity="1.57" lower="-1.57" upper="0.35" />
+      <safety_controller k_velocity="1.57" k_position="15" soft_lower_limit="-1.57" soft_upper_limit="0.35" />
+  </joint>
+
+
+ <transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="head_pan">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="head_tilt">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_shoulder_roll">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <transmission name="tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_shoulder_pitch">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_elbow_pitch">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_shoulder_roll">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor6">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran7">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_shoulder_pitch">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor7">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran8">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_elbow_pitch">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor8">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+	
+	<xacro:rim_macro
+		name="left"
+		color="0.3 0 0"
+		xyz="0.2598076 -0.15 0"
+		rpy="1.570796326794896 0 1.047197551196597"
+	/>
+	<xacro:rim_macro
+		name="back"
+		color="0 0.3 0"
+		xyz="0 0.3 0"
+		rpy="1.570796326794896 0 3.141592653589793"
+	/>
+	<xacro:rim_macro
+		name="right"
+		color="0 0 0.3"
+		xyz="-0.259807 -0.15 0"
+		rpy="1.570796326794896 0 -1.047197551196597"
+	/>
+	<gazebo>
+
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+
+			<robotNamespace>/open_base</robotNamespace>
+
+		</plugin>
+
+	</gazebo>
+
+  <gazebo reference="open_base/hokuyo_link">
+    <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise parameters based on published spec for Hokuyo laser
+               achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+               stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+               reading. -->
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/scan</topicName>
+        <frameName>hokuyo_link</frameName>
+	<robotNamespace>open_base</robotNamespace>
+      </plugin>
+    </sensor>
+    
+  </gazebo>
+
+  <gazebo>
+    <plugin name="silbot_base_controller" filename="libgazebo_ros_planar_move.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryRate>20.0</odometryRate>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+
+    </plugin>
+  </gazebo>
+
+<gazebo reference="kinect_link">
+    <sensor type="depth" name="openni_camera_camera">       
+        <always_on>1</always_on>
+        <visualize>true</visualize>             
+        <camera>
+            <horizontal_fov>1.047</horizontal_fov>  
+            <image>
+                <width>640</width>
+                <height>480</height>
+                <format>R8G8B8</format>
+            </image>
+            <depth_camera>
+
+            </depth_camera>
+            <clip>
+                <near>0.1</near>
+                <far>100</far>
+            </clip>
+        </camera>
+        <plugin name="kinect_controller" filename="libgazebo_ros_openni_kinect.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>10.0</updateRate>
+        <cameraName>camera</cameraName>
+        <frameName>kinect_link</frameName>                   
+        <imageTopicName>/camera/rgb/image_raw</imageTopicName>
+        <depthImageTopicName>/camera/depth/image_raw</depthImageTopicName>
+        <pointCloudTopicName>/camera/depth/points</pointCloudTopicName>
+        <cameraInfoTopicName>/camera/rgb/camera_info</cameraInfoTopicName>              
+        <depthImageCameraInfoTopicName>/camera/depth/camera_info</depthImageCameraInfoTopicName>            
+        <pointCloudCutoff>0.4</pointCloudCutoff>                
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+        <CxPrime>0.0</CxPrime>
+        <Cx>0.0</Cx>
+        <Cy>0.0</Cy>
+        <focalLength>0.0</focalLength>
+        </plugin>
+    </sensor>
+</gazebo>
+
+    <gazebo reference="sonar_1_link">
+      <sensor type="ray" name="sonar">
+	<update_rate>10.0</update_rate>
+        <visualize>true</visualize>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>5</samples>
+              <resolution>1</resolution>
+	      <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>1.4</max> 
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>10.0</updateRate>
+          <topicName>range_1</topicName>
+          <frameName>sonar_1_link</frameName>
+	  <fov>0.4</fov>
+          <radiation>sonar</radiation>
+        </plugin>
+      </sensor>
+    </gazebo>  
+
+    <gazebo reference="sonar_7_link">
+      <sensor type="ray" name="sonar">
+	<update_rate>10.0</update_rate>
+        <visualize>true</visualize>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>5</samples>
+              <resolution>1</resolution>
+	      <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>1.4</max> 
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>10.0</updateRate>
+          <topicName>range_7</topicName>
+          <frameName>sonar_7_link</frameName>
+	  <fov>0.4</fov>
+          <radiation>sonar</radiation>
+        </plugin>
+      </sensor>
+    </gazebo> 
+
+    <gazebo reference="sonar_8_link">
+      <sensor type="ray" name="sonar">
+	<update_rate>10.0</update_rate>
+        <visualize>true</visualize>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>5</samples>
+              <resolution>1</resolution>
+	      <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>1.4</max> 
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>10.0</updateRate>
+          <topicName>range_8</topicName>
+          <frameName>sonar_8_link</frameName>
+	  <fov>0.4</fov>
+          <radiation>sonar</radiation>
+        </plugin>
+      </sensor>
+    </gazebo> 
+
+    <gazebo reference="sonar_2_link">
+      <sensor type="ray" name="sonar">
+	<update_rate>10.0</update_rate>
+        <visualize>true</visualize>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>5</samples>
+              <resolution>1</resolution>
+	      <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>1.4</max> 
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>10.0</updateRate>
+          <topicName>range_2</topicName>
+          <frameName>sonar_2_link</frameName>
+	  <fov>0.4</fov>
+          <radiation>sonar</radiation>
+        </plugin>
+      </sensor>
+    </gazebo> 
+
+    <gazebo reference="sonar_3_link">
+      <sensor type="ray" name="sonar">
+	<update_rate>10.0</update_rate>
+        <visualize>true</visualize>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>5</samples>
+              <resolution>1</resolution>
+	      <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>1.4</max> 
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>10.0</updateRate>
+          <topicName>range_3</topicName>
+          <frameName>sonar_3_link</frameName>
+	  <fov>0.4</fov>
+          <radiation>sonar</radiation>
+        </plugin>
+      </sensor>
+    </gazebo> 
+
+    <gazebo reference="sonar_4_link">
+      <sensor type="ray" name="sonar">
+	<update_rate>10.0</update_rate>
+        <visualize>true</visualize>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>5</samples>
+              <resolution>1</resolution>
+	      <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>1.4</max> 
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>10.0</updateRate>
+          <topicName>range_4</topicName>
+          <frameName>sonar_4_link</frameName>
+	  <fov>0.4</fov>
+          <radiation>sonar</radiation>
+        </plugin>
+      </sensor>
+    </gazebo> 
+
+    <gazebo reference="sonar_5_link">
+      <sensor type="ray" name="sonar">
+	<update_rate>10.0</update_rate>
+        <visualize>true</visualize>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>5</samples>
+              <resolution>1</resolution>
+	      <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>1.4</max> 
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>10.0</updateRate>
+          <topicName>range_5</topicName>
+          <frameName>sonar_5_link</frameName>
+	  <fov>0.4</fov>
+          <radiation>sonar</radiation>
+        </plugin>
+      </sensor>
+    </gazebo> 
+
+    <gazebo reference="sonar_6_link">
+      <sensor type="ray" name="sonar">
+	<update_rate>10.0</update_rate>
+        <visualize>true</visualize>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>5</samples>
+              <resolution>1</resolution>
+	      <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.1</min_angle>
+              <max_angle>0.1</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>1.4</max> 
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>10.0</updateRate>
+          <topicName>range_6</topicName>
+          <frameName>sonar_6_link</frameName>
+	  <fov>0.4</fov>
+          <radiation>sonar</radiation>
+        </plugin>
+      </sensor>
+    </gazebo> 
+
+</robot>

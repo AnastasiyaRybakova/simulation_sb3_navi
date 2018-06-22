@@ -1,0 +1,6 @@
+string pkgname
+string executable
+---
+int32 retcode
+int32 status
+string status_desc

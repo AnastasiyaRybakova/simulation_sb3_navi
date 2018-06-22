@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="prefix" default="silbot3_bringup" />
+    <node name="core" pkg="silbot3_core" type="silbot3_core" respawn="true" output="screen">
+        <rosparam file="$(find silbot3_core)/param/core.yaml" command="load" />
+    </node>
+    <node name="avatar" pkg="silbot3_avatar" type="silbot3_avatar">
+        <rosparam file="$(find silbot3_avatar)/param/avatar.yaml" command="load" />
+    </node>
+    <node name="expression" pkg="silbot3_expression" type="silbot3_expression" />
+    <node name="tts" pkg="silbot3_tts" type="silbot3_tts" />
+    <node name="sound" pkg="silbot3_sound" type="silbot3_sound" />
+</launch>
+

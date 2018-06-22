@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>silbot3_tele_keyboard</name>
+  <version>0.0.0</version>
+  <description>The silbot3_tele_keyboard package</description>
+
+  <maintainer email="zikprid@robocare.co.kr">zikprid</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>silbot3_msgs</build_depend>
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>silbot3_msgs</run_depend>
+
+</package>

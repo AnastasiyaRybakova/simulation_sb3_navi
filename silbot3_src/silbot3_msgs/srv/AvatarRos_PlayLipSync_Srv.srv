@@ -1,0 +1,6 @@
+string opname
+string dirPath
+string filename
+TTSViseme[] visemes
+---
+string result

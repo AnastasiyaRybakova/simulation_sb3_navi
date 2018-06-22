@@ -1,0 +1,5 @@
+string command
+int32[] motorID
+int32[] iParams
+float32[] fParams
+float64[] dParams

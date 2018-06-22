@@ -1,0 +1,25 @@
+/*
+ * IOException.h
+ *
+ *  Created on: Jul 16, 2013
+ *      Author: ijpark
+ */
+
+#ifndef __ROSCIR_EXCEPTION_IOEXCEPTION_H_
+#define __ROSCIR_EXCEPTION_IOEXCEPTION_H_
+
+#include "Exception.h"
+#include <robocare/device/CirApi.h>
+
+namespace roscir {
+namespace exception {
+
+
+class CIRAPI IOException : public Exception {
+public:
+	IOException();
+	virtual ~IOException() throw();
+};
+
+}} /* namespace exceptions */
+#endif /* __ROSCIR_EXCEPTION_IOEXCEPTION_H_ */

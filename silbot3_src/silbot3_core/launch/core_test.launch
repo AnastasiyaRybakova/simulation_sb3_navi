@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="robot_description" textfile="$(find silbot3_description)/robots/silbot3.urdf" />
+ <node name="core" pkg="silbot3_core" type="silbot3_core" output="screen">
+      <rosparam file="$(find silbot3_core)/param/core.yaml" command="load" />
+  </node>
+  <param
+    name="use_gui"
+    value="true" />
+  
+  <node
+    name="robot_state_publisher"
+    pkg="robot_state_publisher"
+    type="state_publisher" />
+
+  <node
+    name="rviz"
+    pkg="rviz"
+    type="rviz"
+    args="-d $(find silbot3_description)/urdf.rviz" />
+</launch>
+

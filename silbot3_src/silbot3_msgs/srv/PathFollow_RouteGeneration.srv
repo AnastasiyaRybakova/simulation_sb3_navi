@@ -1,0 +1,5 @@
+int32 difficulty
+---
+int32 num_step
+int32[] route_x
+int32[] route_y

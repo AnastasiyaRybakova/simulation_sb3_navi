@@ -1,0 +1,6 @@
+string opname
+int32 type
+float32 weight
+string avatarType
+---
+string result

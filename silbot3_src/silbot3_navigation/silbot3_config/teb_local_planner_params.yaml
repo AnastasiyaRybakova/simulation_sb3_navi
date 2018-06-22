@@ -1,0 +1,2 @@
+TebLocalPlannerROS:
+  max_vel_y: 0.4 

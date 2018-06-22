@@ -1,0 +1,5 @@
+int32 round
+int32 difficulty
+---
+int32 num_motion
+int32[] motion

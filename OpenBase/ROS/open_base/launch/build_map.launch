@@ -1,0 +1,11 @@
+<launch>
+
+  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" > 
+  </node>
+
+  <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen"> 
+	<remap from="cmd_vel" to="open_base/cmd_vel"/>
+  </node>
+
+
+</launch>

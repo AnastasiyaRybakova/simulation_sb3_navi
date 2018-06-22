@@ -1,0 +1,11 @@
+# Request timeout (sec)
+uint8 timeout
+---
+# Speech recognition result constants
+uint8 RECOGNITION_RESULT_SUCCESS = 0
+uint8 RECOGNITION_RESULT_TIMEOUT = 1
+uint8 RECOGNITION_RESULT_BUSY = 2
+uint8 RECOGNITION_RESULT_FAILED = 3
+
+uint8 recognition_result
+string recognized_text

@@ -1,0 +1,16 @@
+core:
+  test: false
+  check_motor_error: false
+  check_motor_error_preriod: 60.0
+  check_version: false
+  pantilt:
+    xion_offset: 0
+  depth_sensor_type: kinect
+  check_battery: true
+port:
+  base: ttyMP0
+  body: ttyMP1
+  sensor: ttyMP2
+  etc: ttyMP3
+  gyro: ttyUSB0
+  gyro_baudrate: 115200

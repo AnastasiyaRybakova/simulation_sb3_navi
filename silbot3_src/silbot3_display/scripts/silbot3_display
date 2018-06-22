@@ -1,0 +1,128 @@
+#!/usr/bin/env python
+#-*-coding:utf-8-*-
+
+import rospy
+from std_msgs.msg import String
+from silbot3_msgs.msg import DisplayMessage
+
+import sys
+import signal
+from PySide.QtCore import Qt, QObject, QUrl, QEvent, Slot, Signal
+from PySide.QtGui import QApplication, QMainWindow
+from PySide.QtWebKit import QWebView, QWebSettings
+from PySide.QtScript import QScriptEngine
+
+class ROSEventObject(QObject):
+  OBJECT_NAME = 'ROSEvent'
+  INIT_SCRIPT = ("window.addEventListener('error', function(e) { %(object_name)s.log_error(e.message) }, false); window.onload = function(){ %(object_name)s.ready() }") % {'object_name': OBJECT_NAME}
+  def __init__(self, parent=None):
+    super(ROSEventObject, self).__init__(parent)
+    self.publisher = rospy.Publisher('/silbot3_display/page/event', DisplayMessage, queue_size=10)
+  def initialize(self, page):
+    frame = page.mainFrame()
+    frame.addToJavaScriptWindowObject(self.OBJECT_NAME, self)
+    frame.evaluateJavaScript(self.INIT_SCRIPT)
+  @Slot()
+  def ready(self):
+    pass
+  @Slot(str)
+  def log_error(self, error):
+    rospy.logwarn('Javascript %s', error)
+  @Slot(str, 'QStringList')
+  def publish(self, name, params):
+    message = DisplayMessage()
+    message.name = name
+    message.parameters = params
+    self.publisher.publish(message)
+
+class _UrlEvent(QEvent):
+  EVENT_TYPE = QEvent.Type(QEvent.registerEventType())
+  def __init__(self, url):
+    QEvent.__init__(self, _UrlEvent.EVENT_TYPE)
+    self.url = url
+
+class _CommandEvent(QEvent):
+  EVENT_TYPE = QEvent.Type(QEvent.registerEventType())
+  def __init__(self, name, params):
+    QEvent.__init__(self, _CommandEvent.EVENT_TYPE)
+    self.name = name
+    self.params = params
+
+class MainWindow(QMainWindow):
+  def __init__(self):
+    super(MainWindow, self).__init__()
+    self.view = QWebView(self)
+    self.setCentralWidget(self.view)
+    self.setWindowFlags(Qt.FramelessWindowHint)
+    self.showFullScreen()
+    page = self.view.page()
+    page.settings().setAttribute(QWebSettings.DeveloperExtrasEnabled, True)
+    self.ros_object = ROSEventObject(self)
+    page.mainFrame().javaScriptWindowObjectCleared.connect(self._init_javascript_object)
+    self.view.loadFinished.connect(self._load_finished)
+  def handleUrl(self, url):
+    url = unicode(url, 'utf-8')
+    QApplication.postEvent(self, _UrlEvent(url))
+  def handleCommand(self, name, params):
+    QApplication.postEvent(self, _CommandEvent(name, params))
+  def customEvent(self, event):
+    if event.EVENT_TYPE == _CommandEvent.EVENT_TYPE:
+      script = 'handle_ros_command(\'' + unicode(event.name, 'utf-8') + '\', ['
+      l = len(event.params)
+      for i in range(0, l - 1):
+        s = unicode(event.params[i], 'utf-8')
+        script = script + '\'' + s + '\','
+      if l > 0:
+        s = unicode(event.params[-1], 'utf-8')
+        script = script + '\'' + s + '\''
+      script = script + ']);'
+      frame = self.view.page().mainFrame()
+      frame.evaluateJavaScript(script)
+    else :
+      if event.url == 'hide' :
+        self.hide()
+      elif event.url == 'show' :
+        #self.show()
+        self.showFullScreen()
+      else :
+        qurl = QUrl(event.url)
+        self.view.load(qurl)
+  def _load_finished(self):
+    self.ros_object.publish('webview', ['load-finished'])
+  def _init_javascript_object(self):
+    self.ros_object.initialize(self.view.page())
+
+class DisplayNode(object):
+  def __init__(self):
+    rospy.Subscriber('/silbot3_display/page/show', String, self.on_page_show)
+    rospy.Subscriber('/silbot3_display/page/command', DisplayMessage, self.on_page_command)
+    self.window = MainWindow()
+    self.window.show()
+  def on_page_show(self, msg):
+    self.window.handleUrl(msg.data)
+  def on_page_command(self, msg):
+    self.window.handleCommand(msg.name, msg.parameters)
+
+if __name__ == '__main__':
+  rospy.init_node('silbot3_display', anonymous=True)
+  signal.signal(signal.SIGINT, signal.SIG_DFL)
+  app = QApplication(sys.argv)
+  node = DisplayNode()
+  sys.exit(app.exec_())
+class DisplayNode(object):
+  def __init__(self):
+    rospy.Subscriber('/silbot3_display/page/show', String, self.on_page_show)
+    rospy.Subscriber('/silbot3_display/page/command', DisplayMessage, self.on_page_command)
+    self.window = MainWindow()
+    self.window.show()
+  def on_page_show(self, msg):
+    self.window.handleUrl(msg.data)
+  def on_page_command(self, msg):
+    self.window.handleCommand(msg.name, msg.parameters)
+
+if __name__ == '__main__':
+  rospy.init_node('silbot3_display', anonymous=True)
+  signal.signal(signal.SIGINT, signal.SIG_DFL)
+  app = QApplication(sys.argv)
+  node = DisplayNode()
+  sys.exit(app.exec_())

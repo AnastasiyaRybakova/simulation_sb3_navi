@@ -1,0 +1,19 @@
+# Expression type constants
+uint8 EXPRESSION_TYPE_WITH_MOTION = 0
+uint8 EXPRESSION_TYPE_WITHOUT_MOTION = 1
+uint8 EXPRESSION_TYPE_WITH_SONG = 2
+
+uint8 expression_type
+
+string package
+string category
+string id
+string content # Sound file path if expression_type is EXPRESSION_TYPE_WITH_SONG
+---
+# Expression result constants
+uint8 EXPRESSION_RESULT_OK = 0
+uint8 EXPRESSION_RESULT_MOTION_NOT_FOUND = 1
+uint8 EXPRESSION_RESULT_SOUND_NOT_FOUND = 2
+uint8 EXPRESSION_RESULT_FAILED = 3
+
+uint8 expression_result

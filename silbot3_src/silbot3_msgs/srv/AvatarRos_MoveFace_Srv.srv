@@ -1,0 +1,8 @@
+string opname
+uint16 side
+float32 posX
+float32 posY
+int32 duration
+float32 weight
+---
+string result
